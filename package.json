@@ -1,0 +1,26 @@
+{
+  "name": "hazel",
+  "version": "0.0.1",
+  "description": "Markdown powered Wiki",
+  "author": {
+    "name": "Wade Kallhoff",
+    "email": "w@wmk.io"
+  },
+  "license": "MIT",
+  "keywords": [
+    "hazel",
+    "wiki",
+    "markdown"
+  ],
+  "main": "./app/app.js",
+  "engines": {
+    "node": ">=0.10.x"
+  },
+  "dependencies": {
+      "express": "4.13.4",
+      "extend": "3.0.0",
+      "serve-favicon": "2.3.0",
+      "ejs": "2.4.1",
+      "marked": "0.3.5"
+  }
+}
