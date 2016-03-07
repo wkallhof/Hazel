@@ -4,7 +4,7 @@ const Hazel = require('./app/hazel.js');
 let config = require('./config.default.js');
 
 let app = new Hazel(config);
-let server = app.Server;
+let server = app.server;
 
 // setup the server
 server.set('port', process.env.PORT || 8000);

@@ -1,3 +1,4 @@
+"use strict"
 
 /* --------- MODULES ------------ */
 const express = require("express");
@@ -6,6 +7,7 @@ const path = require("path");
 const fs = require('fs');
 const favicon = require('serve-favicon');
 const ejs = require('ejs');
+const layouts = require('express-ejs-layouts');
 
 let defaultConfig = require("./config.default.js");
 
@@ -13,7 +15,7 @@ let defaultConfig = require("./config.default.js");
 class Hazel {
     
     constructor(config) {
-        this.server = null;
+        this._server = null;
         this.config = defaultConfig;
         
         if (config) { extend(this.config, config); }
@@ -26,36 +28,44 @@ class Hazel {
      *  Allow direct access to the server
      */
     get server() {
-        return this.server;
+        return this._server;
     }
     
     /**
      * Setup the server
      */
     setupServer(){
-        this.server = express();
+        this._server = express();
 
         // Setup Views
         this.config.theme_dir = this.config.theme_dir || path.join(__dirname, '..', 'themes');
         this.config.theme_name = this.config.theme_name || 'default';
 
-        this.server.set('views', path.join(this.config.theme_dir, this.config.theme_name, 'templates'));
-        this.server.set('layout', 'layout');
-        this.server.set('view engine', 'html');
-        this.server.enable('view cache');
-        this.server.engine('html', ejs.renderFile);
+        this._server.set('views', path.join(this.config.theme_dir, this.config.theme_name, 'templates'));
+        this._server.use(layouts)
+        this._server.set('view engine', 'html');
+        this._server.enable('view cache');
+        this._server.engine('html', ejs.renderFile);
 
         // Setup Express
-        this.server.use(favicon(this.config.public_dir + '/favicon.ico'));
-        this.server.use(express.static(this.config.public_dir));
+        this._server.use(favicon(this.config.public_dir + '/favicon.ico'));
+        this._server.use(express.static(this.config.public_dir));
     }
     
     /**
      * Defines all routes for Hazel
      */
     defineRoutes() {
+        this._server.get("/", this.onHomeRequest.bind(this));
         /* /[anything] */
-        this.server.get('*', this.onDefaultRequest.bind(this));
+        this._server.get("*", this.onDefaultRequest.bind(this));
+    }
+    
+    /**
+     * Render the homepage
+     */
+    onHomeRequest(req, res, next) {
+        res.render("home");
     }
     
     /**
@@ -64,7 +74,9 @@ class Hazel {
     onDefaultRequest(req, res, next) {
         if (!req.params[0]) next();
         
-        var slug = req.params[0];
+        let slug = req.params[0];
+        
+        res.render("page");
     }
 }
 

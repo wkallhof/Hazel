@@ -12,12 +12,12 @@
     "wiki",
     "markdown"
   ],
-  "main": "./app/app.js",
   "engines": {
     "node": ">=0.10.x"
   },
   "dependencies": {
       "express": "4.13.4",
+      "express-ejs-layouts": "2.0.0",
       "extend": "3.0.0",
       "serve-favicon": "2.3.0",
       "ejs": "2.4.1",
