@@ -87,12 +87,20 @@ class Hazel {
      */
     getContentHtmlBySlug(slug) {
         let filePath = path.join(this.config.content_dir, slug + ".md");
-        let fileStats = fs.statSync(filePath);
-        if (!fileStats) return;
         
-        let fileContent = fs.readFileSync(filePath, 'utf8');
-        let html = marked(fileContent);
-        return html;
+        // try to read the file on disk
+        try {
+            let fileContent = fs.readFileSync(filePath, 'utf8');
+            let html = marked(fileContent);
+            return html;
+        }
+        catch(e)
+        {
+            // error finding file, return null
+            console.log("Tried to open file: " + slug + " as markdown. " + e);
+            return null;
+        }
+        
     }
 }
 
