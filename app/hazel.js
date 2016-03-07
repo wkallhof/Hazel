@@ -87,6 +87,9 @@ class Hazel {
      */
     getContentHtmlBySlug(slug) {
         let filePath = path.join(this.config.content_dir, slug + ".md");
+        let fileStats = fs.statSync(filePath);
+        if (!fileStats) return;
+        
         let fileContent = fs.readFileSync(filePath, 'utf8');
         let html = marked(fileContent);
         return html;
