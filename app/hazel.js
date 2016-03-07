@@ -57,9 +57,14 @@ class Hazel {
      * Defines all routes for Hazel
      */
     defineRoutes() {
+        // /
         this._server.get("/", this.onHomeRequest.bind(this));
-        /* /[anything] */
-        this._server.get("*", this.onDefaultRequest.bind(this));
+        // /[page]/edit
+        this._server.get("/:slug/edit", this.onEditRequest.bind(this));
+        // /[page]
+        this._server.get("/:slug", this.onDefaultRequest.bind(this));
+        // /[anything else]
+        this._server.get("*", (req, res, next) => next());
     }
     
     /**
@@ -73,10 +78,20 @@ class Hazel {
      * Default Request Handler
      */
     onDefaultRequest(req, res, next) {
-        if (!req.params[0]) next();
+        if (!req.params.slug) next();
+        let content = this.getContentHtmlBySlug(req.params.slug);
         
-        let slug = req.params[0];
-        let content = this.getContentHtmlBySlug(slug);
+        res.render("page", { content: content });
+    }
+    
+    /**
+     * Handle edit request
+     */
+    onEditRequest(req, res, next) {
+        if (!req.params.slug) next();
+        
+        console.log("editing: " + req.params.slug);
+        let content = this.getContentHtmlBySlug(req.params.slug);
         
         res.render("page", { content: content });
     }
