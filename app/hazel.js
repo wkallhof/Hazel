@@ -8,6 +8,7 @@ const fs = require('fs');
 const favicon = require('serve-favicon');
 const ejs = require('ejs');
 const layouts = require('express-ejs-layouts');
+const marked = require("marked");
 
 let defaultConfig = require("./config.default.js");
 
@@ -75,8 +76,20 @@ class Hazel {
         if (!req.params[0]) next();
         
         let slug = req.params[0];
+        let content = this.getContentHtmlBySlug(slug);
         
-        res.render("page");
+        res.render("page", { content: content });
+    }
+    
+    /**
+     * Get the contents of content file
+     * based on slug for file
+     */
+    getContentHtmlBySlug(slug) {
+        let filePath = path.join(this.config.content_dir, slug + ".md");
+        let fileContent = fs.readFileSync(filePath, 'utf8');
+        let html = marked(fileContent);
+        return html;
     }
 }
 
