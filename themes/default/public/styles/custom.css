@@ -25,11 +25,11 @@ body .before-main-wrapper .header-wrapper h6 {
 }
 body .before-main-wrapper .header-wrapper {
     color: #ffffff;
-    padding-top: 100px;
-    padding-bottom: 100px;
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 .before-main-wrapper .header-wrapper:after {
-    background-image: url("http://themes.pressapps.io/knowledgepress-1/wp-content/uploads/sites/6/2015/10/Working-Space.jpg");
+    background-image: url("http://dkemhji6i1k0x.cloudfront.net/000_clients/128725/page/12872515336ztIZ.jpg");
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -340,4 +340,22 @@ h6,
 
 .navbar a.navbar-brand h2{
     margin: auto;
+}
+
+textarea{
+    width: 100%;
+    margin: 0px;
+    height: 400px;
+}
+
+.toc-h2 {
+    padding-left: 10px;
+}
+
+.toc-h3 {
+    padding-left: 20px;
+}
+
+h1.page-title{
+    display:inline;
 }

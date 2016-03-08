@@ -3,10 +3,12 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Hazel Wiki</title>
+        <title><%= title ? title+" | " : ""%> Hazel Wiki</title>
         <link rel="stylesheet" href="/styles/main.css" type='text/css' media='all' />
         <link rel="stylesheet" href="/styles/custom.css" type='text/css' media='all' />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Muli%3A400%2C300&#038;subset=latin&#038;ver=4.4.2' type='text/css' media='all' />
+        <%- style %>
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
@@ -22,15 +24,12 @@
                     <a class="navbar-brand" href="/">
                         <h2>HAZEL</h2>
                     </a>
-                </div>
-                
-                <nav class="nav-main navbar-collapse collapse" role="navigation">                    
-                    <!-- SEARCH -->
                     <form role="search" method="get" id="searchform" class="form-search navbar-form" action="http://themes.pressapps.io/knowledgepress-1/">
+                        <i class="fa fa-search"></i>
                         <label class="hide" for="s">Search for:</label>
                         <input type="text" value="" name="s" id="autocomplete-ajax" class="searchajax form-control search-query" placeholder="Search Knowledge Base">
                     </form>
-                </nav>
+                </div>
             </div>
         </header>
         
@@ -40,7 +39,7 @@
         <div class="footer-cta"></div>
         <footer id="page-footer " class="content-info " role="contentinfo ">
             <div class="container ">
-                <div class="row ">
+                <!--<div class="row ">
                     <div class="col-md-4">
                         <section id="custom-recent-posts-3 " class="widget widget_recent_entries ">
                             <h3 class="widget-title ">Recent Articles</h3>
@@ -118,7 +117,7 @@
                             </ul>
                         </section>
                     </div>
-                </div>
+                </div>-->
                 <div class="clearfix "></div>
                 <div id="footer-copyright">
                     <div class="row">
@@ -128,5 +127,7 @@
                 </div>
             </div>
         </footer>
+        
+        <%- script %>
     </body>
 </html>

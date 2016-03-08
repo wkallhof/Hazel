@@ -21,6 +21,8 @@
       "extend": "3.0.0",
       "serve-favicon": "2.3.0",
       "ejs": "2.4.1",
-      "marked": "0.3.5"
+      "marked": "0.3.5",
+      "underscore.string": "^2.3.3",
+      "body-parser": "1.15.0"
   }
 }

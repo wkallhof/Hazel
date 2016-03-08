@@ -3324,7 +3324,7 @@ select[multiple].input-group-sm>.input-group-btn>.btn {
 .navbar-collapse.in {
     overflow-y: auto
 }
-@media (min-width: 992px) {
+
     .navbar-collapse {
         width: auto;
         border-top: 0;
@@ -3347,7 +3347,7 @@ select[multiple].input-group-sm>.input-group-btn>.btn {
         padding-left: 0;
         padding-right: 0
     }
-}
+
 .navbar-fixed-top .navbar-collapse,
 .navbar-fixed-bottom .navbar-collapse {
     max-height: 340px
@@ -5482,159 +5482,6 @@ p.flex-caption {
     opacity: 1;
     cursor: default
 }
-.kp-w {
-    display: inline-block;
-    width: 1.3em;
-    text-align: center
-}
-@font-face {
-    font-family: 'knowledgepress';
-    src: url('../fonts/knowledgepress.eot?oyqv8d');
-    src: url('../fonts/knowledgepress.eot?oyqv8d#iefix') format('embedded-opentype'), url('../fonts/knowledgepress.ttf?oyqv8d') format('truetype'), url('../fonts/knowledgepress.woff?oyqv8d') format('woff'), url('../fonts/knowledgepress.svg?oyqv8d#knowledgepress') format('svg');
-    font-weight: normal;
-    font-style: normal
-}
-[class^="kp-"],
-[class*=" kp-"] {
-    font-family: 'knowledgepress' !important;
-    speak: none;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale
-}
-.kp-search:before {
-    content: "\f002"
-}
-.kp-twitter:before {
-    content: "\f099"
-}
-.kp-facebook:before {
-    content: "\f09a"
-}
-.kp-facebook-f:before {
-    content: "\f09a"
-}
-.kp-github:before {
-    content: "\f09b"
-}
-.kp-feed:before {
-    content: "\f09e"
-}
-.kp-rss:before {
-    content: "\f09e"
-}
-.kp-pinterest:before {
-    content: "\f0d2"
-}
-.kp-google-plus:before {
-    content: "\f0d5"
-}
-.kp-envelope:before {
-    content: "\f0e0"
-}
-.kp-linkedin:before {
-    content: "\f0e1"
-}
-.kp-youtube:before {
-    content: "\f167"
-}
-.kp-instagram:before {
-    content: "\f16d"
-}
-.kp-flickr:before {
-    content: "\f16e"
-}
-.kp-bitbucket:before {
-    content: "\f171"
-}
-.kp-tumblr:before {
-    content: "\f173"
-}
-.kp-dribbble:before {
-    content: "\f17d"
-}
-.kp-skype:before {
-    content: "\f17e"
-}
-.kp-digg:before {
-    content: "\f1a6"
-}
-.kp-soundcloud:before {
-    content: "\f1be"
-}
-.kp-vimeo:before {
-    content: "\f27d"
-}
-.kp-reddit-alien:before {
-    content: "\f281"
-}
-.kp-home8:before {
-    content: "\e907"
-}
-.kp-image4:before {
-    content: "\e941"
-}
-.kp-film3:before {
-    content: "\e960"
-}
-.kp-file-text2:before {
-    content: "\e9ad"
-}
-.kp-folder4:before {
-    content: "\e9de"
-}
-.kp-folder-open3:before {
-    content: "\e9ea"
-}
-.kp-price-tags2:before {
-    content: "\e9f1"
-}
-.kp-history:before {
-    content: "\ea4c"
-}
-.kp-calendar3:before {
-    content: "\ea61"
-}
-.kp-bubble2:before {
-    content: "\eac7"
-}
-.kp-user2:before {
-    content: "\eb00"
-}
-.kp-link2:before {
-    content: "\ec9b"
-}
-.kp-flag8:before {
-    content: "\ecab"
-}
-.kp-thumbs-up2:before {
-    content: "\ecf5"
-}
-.kp-thumbs-down2:before {
-    content: "\ecf7"
-}
-.kp-smile:before {
-    content: "\ed04"
-}
-.kp-sad:before {
-    content: "\ed08"
-}
-.kp-volume-medium3:before {
-    content: "\ed9a"
-}
-.kp-arrow-right4:before {
-    content: "\edbe"
-}
-.kp-arrow-left4:before {
-    content: "\edc6"
-}
-.kp-share3:before {
-    content: "\eee0"
-}
 .alignright,
 .alignleft,
 .aligncenter,
@@ -5886,13 +5733,6 @@ a.toggle-nav.open {
 }
 .navbar-form {
     position: relative
-}
-.navbar-form:before {
-    position: absolute;
-    font-family: knowledgepress;
-    top: 19px;
-    left: -10px;
-    content: "\f002"
 }
 .navbar-form input::-webkit-input-placeholder {
     opacity: 0.5
