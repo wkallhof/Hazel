@@ -155,6 +155,11 @@ body .before-main-wrapper .header-wrapper {
 }
 a {
     color: #282828;
+    
+}
+article a {
+    text-decoration: underline;
+    font-weight: bold;
 }
 .btn-primary {
     background-color: #282828;

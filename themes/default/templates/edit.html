@@ -20,9 +20,12 @@
                 </div>
                 <div class="form-group">
                     <label for="content">Content</label>
-                    <textarea class="form-control js-content" name="content"><%= content %></textarea>
+                    <textarea class="form-control js-content" name="content"><%= markdown %></textarea>
                 </div>
-                
+                <div class="form-group">
+                    <label for="title">Tags</label>
+                    <input type="text" class="form-control" id="tags" name="tags" placeholder="Tags..." value="<%= tags.join() %>">
+                </div>
                 <a href="/<%= slug %>" type="button" class="btn btn-primary js-close">Close</a>
                 <input type="submit" class="btn btn-success js-save"  value="Save"/>
            </form>

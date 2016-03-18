@@ -1,9 +1,10 @@
 'use strict';
 
-const Hazel = require('./app/hazel.js');
-let config = require('./config.default.js');
+const Hazel = require("./app/hazel.js");
+const config = require("./config.default.js");
+const DocumentStorageProvider = require("./app/providers/documentStorageProvider");
 
-let app = new Hazel(config);
+let app = new Hazel(config, DocumentStorageProvider);
 let server = app.server;
 
 // setup the server
