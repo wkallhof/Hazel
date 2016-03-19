@@ -10,6 +10,10 @@ class AnalyticsService {
         this._pageVisits = this._storageProvider.readObject("visits.json") || {};
     }
 
+    /**
+     * Updates the view count for a given document
+     * slug
+     */
     updateViewCount(slug) {
         if (!slug) return null;
 
@@ -22,6 +26,10 @@ class AnalyticsService {
         this._storageProvider.storeObject("visits.json", this._pageVisits);
     }
 
+    /**
+     * Getes the view count for a given document
+     * slug
+     */
     getViewCount(slug) {
         if (!slug || !this._pageVisits[slug]) return 0;
         return this._pageVisits[slug];

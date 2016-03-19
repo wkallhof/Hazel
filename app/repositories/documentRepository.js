@@ -64,11 +64,11 @@ class DocumentRepository {
     /**
      * Delete a document from the repository
      */
-    delete(document) {
-        var existingDoc = _.find(this._documents, { "slug": document.slug });
+    delete(slug) {
+        var existingDoc = _.find(this._documents, { "slug": slug });
         if (existingDoc) {
             this._storageProvider.deleteDocument(existingDoc);
-            _.remove(this._documents, { "slug": document.slug });
+            _.remove(this._documents, { "slug": slug });
         }
     }
 }

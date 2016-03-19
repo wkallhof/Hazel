@@ -32,6 +32,9 @@ class HomeController {
         res.render("home", viewModel);
     }
 
+    /**
+     * Fetch the most recent documents
+     */
     fetchRecentDocuments(count) {
         let documents = this._documents.all();
 
@@ -43,6 +46,9 @@ class HomeController {
             .value();
     }
 
+    /**
+     * Fetch random documents
+     */
     fetchRandomDocuments(count) {
         let documents = this._documents.all();
 
@@ -52,6 +58,9 @@ class HomeController {
             .value();
     }
 
+    /**
+     * Fetch the most popular documents
+     */
     fetchPopularDocuments(count) {
         let documents = this._documents.all();
 

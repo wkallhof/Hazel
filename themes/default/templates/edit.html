@@ -26,8 +26,13 @@
                     <label for="title">Tags</label>
                     <input type="text" class="form-control" id="tags" name="tags" placeholder="Tags..." value="<%= tags.join() %>">
                 </div>
-                <a href="/<%= slug %>" type="button" class="btn btn-primary js-close">Close</a>
-                <input type="submit" class="btn btn-success js-save"  value="Save"/>
+                <a href="/<%= slug %>" class="btn btn-primary">Close</a>
+                <input type="hidden" id="originalSlug" name="originalSlug" value="<%= slug %>" />
+                <input type="submit" class="btn btn-success" value="Save"/>
+                
+                <% if(slug){ %>
+                <a href="/<%= slug %>/delete" class="btn btn-danger pull-right js-delete">Delete</a>
+                <% } %>
            </form>
         </div>
     </div>
@@ -35,5 +40,6 @@
 </div>
 <!-- /.wrap -->
 
+<script src="/vendor/jquery.js" type="text/javascript"></script>
 <script src="/vendor/autosize.js" type="text/javascript"></script>
 <script src="/scripts/edit.js" type="text/javascript"></script>
