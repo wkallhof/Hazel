@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 const Document = require("../models/document");
 
@@ -6,7 +6,7 @@ const Document = require("../models/document");
  * Utility class that handles parsing the document file
  * for any metadata
  */
-class DocumentParserUtility{
+class DocumentParserUtility {
 
     constructor() {
         this._metaRegex = /<!--META (.*) -->/;
@@ -16,8 +16,7 @@ class DocumentParserUtility{
      * Handles taking in file content and returning
      * a document object;
      */
-    getDocumentFromFileContent(fileContent)
-    {
+    getDocumentFromFileContent(fileContent) {
         let metaData = this.extractMetaData(fileContent);
         let markdown = this.extractContent(fileContent);
 
@@ -32,7 +31,7 @@ class DocumentParserUtility{
 
         if (markdown) {
             document.markdown = markdown;
-        }        
+        }
 
         return document;
     }
@@ -41,20 +40,18 @@ class DocumentParserUtility{
      * Extracts the metadata object from the document
      * file if it exists.
      */
-    extractMetaData(fileContent)
-    {
+    extractMetaData(fileContent) {
         let meta = fileContent.match(this._metaRegex);
-        if (!meta || meta.length != 2) return null;
+        if (!meta || meta.length !== 2) return null;
 
-        return JSON.parse(meta[1]);        
+        return JSON.parse(meta[1]);
     }
 
     /**
      * Handles extracting just the content from the
      * document file
      */
-    extractContent(fileContent)
-    {
+    extractContent(fileContent) {
         return fileContent.replace(this._metaRegex, "");
     }
 
@@ -62,18 +59,17 @@ class DocumentParserUtility{
      * Handles converting a document into a file content
      * string
      */
-    convertDocumentToFileContent(document)
-    {
+    convertDocumentToFileContent(document) {
         let metaData = {
-            title : document.title,
+            title: document.title,
             tags: document.tags,
             createDate: document.createDate,
             updateDate: document.updateDate
-        }
+        };
 
         let metaString = JSON.stringify(metaData);
-        let commentString = "<!--META "+metaString+" -->";
-        
+        let commentString = "<!--META " + metaString + " -->";
+
         return commentString + "\n" + document.markdown;
     }
 }

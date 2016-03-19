@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 const _ = require("lodash");
 
@@ -8,9 +8,9 @@ const _ = require("lodash");
  * of all documents before sending for consumption in order
  * to enforce using the repo for CRUD operations.
  */
-class DocumentRepository{
-    constructor(documentStorageProvider)
-    {
+class DocumentRepository {
+
+    constructor(documentStorageProvider) {
         this._storageProvider = documentStorageProvider;
         this._documents = this._storageProvider.getAllDocuments();
     }
@@ -19,9 +19,10 @@ class DocumentRepository{
      * Return all documents in the repository
      */
     all() {
-        return _.map(this._documents, (document) => {
-            return _.clone(document);
-        });
+        return _.chain(this._documents)
+            .map((document) => _.clone(document))
+            .compact()
+            .value();
     }
 
     /**
@@ -40,37 +41,36 @@ class DocumentRepository{
         var existing = _.find(this._documents, { "slug": document.slug });
         if (!existing) {
             document.createDate = Date.now();
-            document.updateDate = document.createDate;  
+            document.updateDate = document.createDate;
             this._storageProvider.storeDocument(document);
             this._documents.push(document);
         }
-    }    
+    }
 
     /**
      * Update an existing document in the repository
-     */    
+     */
     update(document) {
         var index = _.findIndex(this._documents, { "slug": document.slug });
         if (index >= 0) {
             this._documents[index] = document;
             this._documents[index].updateDate = Date.now();
             this._storageProvider.storeDocument(this._documents[index]);
-        }
-        else {
+        } else {
             this.add(document);
         }
     }
 
     /**
      * Delete a document from the repository
-     */    
+     */
     delete(document) {
         var existingDoc = _.find(this._documents, { "slug": document.slug });
         if (existingDoc) {
             this._storageProvider.deleteDocument(existingDoc);
             _.remove(this._documents, { "slug": document.slug });
         }
-    }  
+    }
 }
 
 module.exports = DocumentRepository;

@@ -1,139 +1,96 @@
 <!-- MAIN CONTENT HEAD -->
-        <div class="before-main-wrapper">
-            <div class="header-wrapper">
-                <div class="container header-center ">
-                    <div class="header-sidebar ">
-                        <div id="widget_pa_live_search-2 " class="widget clearfix
-                            widget_pa_live_search ">
-                            <h3 class="widget-title ">Live Search</h3>
-                            <div class="live-search ">
-                                <form role="search " method="get " id="searchform " class="form-search " action="http://themes.pressapps.io/knowledgepress-1/ ">
-                                    <div class="input-group ">
-                                        <input type="text " id="autocomplete-ajax " name="s " id="s " class="searchajax search-query form-control" autocomplete="off " placeholder="Search for content here...">
-                                        <span class="input-group-btn ">
-                                        <input type="submit " id="searchsubmit " value="Search " class="btn btn-primary ">
-                                        </span>
-                                    </div>
-                                </form>
-                                <script> _url = 'http://themes.pressapps.io/knowledgepress-1/wp-admin/admin-ajax.php';</script>		
+<div class="before-main-wrapper">
+    <div class="header-wrapper">
+        <div class="container header-center ">
+            <div class="header-sidebar ">
+                <div id="widget_pa_live_search-2 " class="widget clearfix widget_pa_live_search ">
+                    
+                    <!-- DOCUMENT SEARCH -->
+                    
+                    <h3 class="widget-title ">Document Search</h3>
+                    <div class="live-search ">
+                        <form role="search " method="get" id="searchform " class="form-search " action="/search">
+                            <div class="input-group">
+                                <input type="text" id="autocomplete-ajax " name="s" id="s" class="searchajax search-query form-control" autocomplete="off " placeholder="Search for content here...">
+                                <span class="input-group-btn ">
+                                <input type="submit " id="searchsubmit " value="Search " class="btn btn-primary ">
+                                </span>
                             </div>
-                            <p class="top-searches ">Popular searches: <a href='http://themes.pressapps.io/knowledgepress-1/?s=wiki'>wiki</a>, <a href='http://themes.pressapps.io/knowledgepress-1/?s=search'>search</a>, <a href='http://themes.pressapps.io/knowledgepress-1/?s=theme'>theme</a>,<a href='http://themes.pressapps.io/knowledgepress-1/?s=setup'>setup</a></p>
-                        </div>
-                    </div >
-                </div >
+                        </form>	
+                    </div>
+                    
+                    <!-- POPULAR SEARCHES -->
+                    
+                    <% if(popularSearches && popularSearches.length > 0){ %>
+                        <p class="top-searches ">Popular searches:
+                        <% for(var search in popularSearches){ %>
+                            <a href="/search?s=<%= encodeURIComponent(search) %>"><%= search %></a>
+                        <% } %>
+                        </p>
+                    <% } %>
+                </div>
             </div >
         </div >
-        
-        <!-- MAIN CONTENT -->
-        <div class="container wrap main-section " id="wrap-main-section ">
-            <div id="content " class="content ">
-                <div class="row bg ">
-                    <main class="main col-sm-12 "  role="main ">
-                        <div class="row knowledge-base-row ">
-                            <div class="col-sm-4 kb-category ">
-                                <h2>
-                                    <a href="http://themes.pressapps.io/knowledgepress-1/category/using-the-admin-panel/ " title="Admin Panel ">
-                                    Admin Panel            </a>
-                                </h2>
-                                <ul class="category-posts ">
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-file-text2 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2012/11/05/subscriptions/ ">Subscriptions Modul Setup</a></li>
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-image4 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2012/11/05/functionality/ ">Live Search</a></li>
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-image4 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2012/11/05/upgrading-theme/ ">Upgrading Theme</a></li>
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-film3 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2012/11/05/ftp-installation/ ">Plugin Installation</a></li>
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-file-text2 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2012/11/05/local-server-setup/ ">Local Server Setup</a></li>
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-file-text2 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2012/11/05/automated-follow-up-emails/ ">Follow up Emails</a></li>
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-file-text2 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2013/01/12/standard-post-format/ ">Standard Post Format</a></li>
-                                </ul>
-                                <a class="view-all " href="http://themes.pressapps.io/knowledgepress-1/category/using-the-admin-panel/ " > View all 7 articles</a>
-                            </div>
-                            <div class="col-sm-4 kb-category ">
-                                <h2>
-                                    <a href="http://themes.pressapps.io/knowledgepress-1/category/administration/ " title="Administration ">
-                                    Administration            </a>
-                                </h2>
-                                <ul class="category-posts ">
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-file-text2 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2012/11/05/multiple-installs-on-one-domain/ ">Multiple installs on one domain</a></li>
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-file-text2 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2012/11/05/increasing-the-memory-limit/ ">Increasing Memory</a></li>
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-image4 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2012/11/05/downloadable-product-handling/ ">Downloadable product</a></li>
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-file-text2 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2012/11/05/setting-up-product-attributes/ ">Setting up attributes</a></li>
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-file-text2 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2012/11/05/shipping-options-page/ ">Shipping Options Page</a></li>
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-image4 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2012/11/05/paypal-payments-setup/ ">Fully Responsive Design</a></li>
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-file-text2 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2013/01/12/disabled-comments/ ">Disabled Comments</a></li>
-                                </ul>
-                                <a class="view-all " href="http://themes.pressapps.io/knowledgepress-1/category/administration/ " > View all 7 articles</a>
-                            </div>
-                            <div class="col-sm-4 kb-category ">
-                                <h2>
-                                    <a href="http://themes.pressapps.io/knowledgepress-1/category/customization/ " title="Customization ">
-                                    Customization            </a>
-                                </h2>
-                                <ul class="category-posts ">
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-film3 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2012/06/19/vimeo-video/ ">Customizing Forms</a></li>
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-file-text2 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2012/11/05/shipping-methods/ ">Shipping Methods</a></li>
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-file-text2 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2012/11/05/increasing-the-memory-limit/ ">Increasing Memory</a></li>
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-file-text2 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2012/11/05/shipping-options-page/ ">Shipping Options Page</a></li>
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-file-text2 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2012/11/05/local-pickup/ ">Well Documented</a></li>
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-file-text2 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2013/01/12/unlimited-theme-colors/ ">Theme Set Up</a></li>
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-file-text2 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2013/01/12/standard-post-format/ ">Standard Post Format</a></li>
-                                </ul>
-                                <a class="view-all " href="http://themes.pressapps.io/knowledgepress-1/category/customization/ " > View all 7 articles</a>
-                            </div>
-                        </div>
-                        <div class="row knowledge-base-row ">
-                            <div class="col-sm-4 kb-category ">
-                                <h2>
-                                    <a href="http://themes.pressapps.io/knowledgepress-1/category/extensions/ " title="Extensions ">
-                                    Extensions            </a>
-                                </h2>
-                                <ul class="category-posts ">
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-file-text2 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2012/11/05/subscriptions/ ">Subscriptions Modul Setup</a></li>
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-file-text2 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2012/11/05/importexport/ ">Import and Export Extension</a></li>
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-file-text2 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2012/11/05/shipping-methods/ ">Shipping Methods</a></li>
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-image4 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2012/11/05/functionality/ ">Live Search</a></li>
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-file-text2 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2012/11/05/payment-extension/ ">Payment Extension</a></li>
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-file-text2 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2012/11/05/automated-follow-up-emails/ ">Follow up Emails</a></li>
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-file-text2 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2013/01/12/disabled-comments/ ">Disabled Comments</a></li>
-                                </ul>
-                                <a class="view-all " href="http://themes.pressapps.io/knowledgepress-1/category/extensions/ " > View all 7 articles</a>
-                            </div>
-                            <div class="col-sm-4 kb-category ">
-                                <h2>
-                                    <a href="http://themes.pressapps.io/knowledgepress-1/category/shipping-methods/ " title="Shipping Methods ">
-                                    Shipping Methods            </a>
-                                </h2>
-                                <ul class="category-posts ">
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-file-text2 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2012/11/05/setting-up-product-attributes/ ">Setting up attributes</a></li>
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-file-text2 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2012/11/05/shipping-options-page/ ">Shipping Options Page</a></li>
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-film3 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2012/11/05/multiple-ship-to-addresses/ ">Multiple Ship to Addresses</a></li>
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-file-text2 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2012/11/05/local-pickup/ ">Well Documented</a></li>
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-file-text2 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2012/11/05/flat-rate-shipping/ ">Unlimited Colors</a></li>
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-file-text2 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2012/11/05/automated-follow-up-emails/ ">Follow up Emails</a></li>
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-file-text2 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2013/01/12/disabled-comments/ ">Disabled Comments</a></li>
-                                </ul>
-                                <a class="view-all " href="http://themes.pressapps.io/knowledgepress-1/category/shipping-methods/ " > View all 7 articles</a>
-                            </div>
-                            <div class="col-sm-4 kb-category ">
-                                <h2>
-                                    <a href="http://themes.pressapps.io/knowledgepress-1/category/tips-and-tricks/ " title="Tips and Tricks ">
-                                    Tips and Tricks            </a>
-                                </h2>
-                                <ul class="category-posts ">
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-file-text2 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2012/11/05/subscriptions/ ">Subscriptions Modul Setup</a></li>
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-file-text2 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2012/11/05/multiple-installs-on-one-domain/ ">Multiple installs on one domain</a></li>
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-file-text2 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2012/11/05/increasing-the-memory-limit/ ">Increasing Memory</a></li>
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-image4 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2012/11/05/downloadable-product-handling/ ">Downloadable product</a></li>
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-file-text2 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2012/11/05/setting-up-product-attributes/ ">Setting up attributes</a></li>
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-image4 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2012/11/05/paypal-payments-setup/ ">Fully Responsive Design</a></li>
-                                    <li class="list-post pa-post-format "><i class="kp-w kp-file-text2 "></i> <a href="http://themes.pressapps.io/knowledgepress-1/2013/01/12/unlimited-theme-colors/ ">Theme Set Up</a></li>
-                                </ul>
-                                <a class="view-all " href="http://themes.pressapps.io/knowledgepress-1/category/tips-and-tricks/ " > View all 8 articles</a>
-                            </div>
-                        </div>
-                    </main>
-                    <!-- /.main -->
-                    <div class="clearfix "></div>
+    </div >
+</div >
+
+<!-- MAIN CONTENT -->
+<div class="container wrap main-section " id="wrap-main-section ">
+    <div id="content " class="content ">
+        <div class="row bg ">
+            <main class="main col-sm-12 "  role="main ">
+                <div class="row knowledge-base-row ">
+                    
+                    <!-- RECENT DOCUMENTS -->
+                    <div class="col-sm-4 kb-category ">
+                        <h2>
+                            Recent Documents
+                        </h2>
+                        <% if(recentDocuments && recentDocuments.length > 0){%>
+                        <ul class="category-posts ">
+                            <% for(var i = 0; i < recentDocuments.length; i++){ var document = recentDocuments[i];%>
+                                <li class="list-post pa-post-format ">
+                                    <i class="fa fa-file-text fa-fw"></i> <a href="/<%= document.slug %>"><%= document.title %></a>
+                                </li>
+                            <% } %>
+                        </ul>
+                        <% } %>
+                    </div>
+                    
+                    <!-- POPULAR DOCUMENTS -->
+                    <div class="col-sm-4 kb-category ">
+                        <h2>
+                            Popular Documents
+                        </h2>
+                        <% if(popularDocuments && popularDocuments.length > 0){ %>
+                        <ul class="category-posts ">
+                            <% for(var i = 0; i < popularDocuments.length; i++){ var document = popularDocuments[i];%>
+                                <li class="list-post pa-post-format "><i class="fa fa-file-text"></i> <a href="/<%= document.slug %>"><%= document.title %></a></li>
+                            <% } %>
+                        </ul>
+                        <% } %>
+                    </div>
+                     
+                    <!-- RANDOM DOCUMENTS -->
+                    <div class="col-sm-4 kb-category ">
+                        <h2>
+                            Random Documents
+                        </h2>
+                        <% if(randomDocuments && randomDocuments.length > 0){ %>
+                        <ul class="category-posts ">
+                            <% for(var i = 0; i < randomDocuments.length; i++){ var document = randomDocuments[i];%>
+                                <li class="list-post pa-post-format "><i class="fa fa-file-text"></i> <a href="/<%= document.slug %>"><%= document.title %></a></li>
+                            <% } %>
+                        </ul>
+                        <% } %>
+                    </div>
+                    
                 </div>
-            </div>
-            <!-- /.content -->
+            </main>
+            <!-- /.main -->
+            <div class="clearfix "></div>
         </div>
-        <!-- /.wrap -->
+    </div>
+    <!-- /.content -->
+</div>
+<!-- /.wrap -->

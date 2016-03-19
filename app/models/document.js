@@ -1,10 +1,10 @@
-"use strict"
+"use strict";
 
 /**
  * Represents a single document in the
  * Hazel system
  */
-class Document{
+class Document {
     constructor() {
         this.title = "";
         this.slug = "";
@@ -13,7 +13,7 @@ class Document{
         this.updateDate = null;
         this.createDate = null;
         this.tags = [];
-    }  
+    }
 }
 
 module.exports = Document;

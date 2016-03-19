@@ -1,21 +1,20 @@
-"use strict"
+"use strict";
 
 const DocumentParserUtility = require("../utilities/documentParserUtility");
 const fs = require("fs");
 const _ = require("lodash");
 const path = require("path");
-const _s = require('underscore.string');
+const _s = require("underscore.string");
 
 /**
- * Handles all storage related tasks for documents. This
+ * Handles all storage related tasks. This
  * allows us to swap out providers in order to handle different
  * scenarios like cloud storage or version control storage as
  * apposed to just disk based storage.
  */
-class DocumentStorageProvider{
+class StorageProvider {
 
-    constructor(config)
-    {
+    constructor(config) {
         this._config = config;
         this._parser = new DocumentParserUtility();
     }
@@ -27,21 +26,20 @@ class DocumentStorageProvider{
         if (!slug) return null;
 
         let filePath = path.join(this._config.content_dir, slug + ".md");
-        
+
         // try to read the file on disk
         try {
-            let fileContent = fs.readFileSync(filePath, 'utf8');
+            let fileContent = fs.readFileSync(filePath, "utf8");
             let document = this._parser.getDocumentFromFileContent(fileContent);
             if (!document) return null;
 
             document.slug = slug;
-            if (!document.title)
+            if (!document.title) {
                 document.title = this.slugToTitle(slug);
+            }
 
             return document;
-        }
-        catch(e)
-        {
+        } catch (e) {
             // error finding file, return null
             console.log("Tried to open file: " + slug + " as markdown. ");
             return null;
@@ -56,26 +54,24 @@ class DocumentStorageProvider{
         let fileContent = this._parser.convertDocumentToFileContent(document);
 
         try {
-            fs.writeFileSync(filePath, fileContent, 'utf8');
-        }
-        catch(e){
-            console.log("Error writing content to file" + slug);
+            fs.writeFileSync(filePath, fileContent, "utf8");
+        } catch (e) {
+            console.log("Error writing content to file" + document.slug);
         }
     }
 
     /**
      * Handles deleting a document.
-     */    
+     */
     deleteDocument(document) {
         let filePath = path.join(this._config.content_dir, document.slug + ".md");
 
         try {
             fs.unlinkSync(filePath);
-        }
-        catch(e){
+        } catch (e) {
             console.log("Error deleting file" + document.slug);
         }
-    }    
+    }
 
     /**
      * Handles getting all documents.
@@ -92,9 +88,39 @@ class DocumentStorageProvider{
             });
 
             return documents;
-        }
-        catch (e) {
+        } catch (e) {
             console.log("Error reading all files");
+        }
+    }
+
+    /**
+     * Handles storing a object to a file on disk.
+     */
+    storeObject(fileName, object) {
+        let filePath = path.join(this._config.data_dir, fileName);
+
+        try {
+            fs.writeFile(filePath, JSON.stringify(object), "utf8");
+        } catch (e) {
+            console.log("Error writing object to file" + fileName);
+        }
+    }
+
+    /**
+     * Handles reading a file on disk and converting to
+     * an object.
+     */
+    readObject(fileName) {
+        let filePath = path.join(this._config.data_dir, fileName);
+
+        // try to read the file on disk
+        try {
+            let fileContent = fs.readFileSync(filePath, "utf8");
+            return JSON.parse(fileContent);
+        } catch (e) {
+            // error finding file, return null
+            console.log("Tried to open file: " + fileName + " as object. ");
+            return null;
         }
     }
 
@@ -102,24 +128,22 @@ class DocumentStorageProvider{
      * Handles converting the provided slug string
      * to a title with spaces and capitalization
      */
-    slugToTitle(slug)
-    {
-		return _s.titleize(_s.humanize(slug.trim()));
+    slugToTitle(slug) {
+        return _s.titleize(_s.humanize(slug.trim()));
     }
-    
+
     /**
      * Handles converting a title to a slug
      * for the URL
      */
-    titleToSlug(title)
-    {
+    titleToSlug(title) {
         return title.toString().toLowerCase()
-            .replace(/\s+/g, '-')           // Replace spaces with -
-            .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
-            .replace(/\-\-+/g, '-')         // Replace multiple - with single -
-            .replace(/^-+/, '')             // Trim - from start of text
-            .replace(/-+$/, '');            // Trim - from end of text
-    }    
+            .replace(/\s+/g, "-")           // Replace spaces with -
+            .replace(/[^\w\-]+/g, "")       // Remove all non-word chars
+            .replace(/\-\-+/g, "-")         // Replace multiple - with single -
+            .replace(/^-+/, "")             // Trim - from start of text
+            .replace(/-+$/, "");            // Trim - from end of text
+    }
 }
 
-module.exports = DocumentStorageProvider;
+module.exports = StorageProvider;
