@@ -9,11 +9,11 @@ const ejs = require("ejs");
 const layouts = require("express-ejs-layouts");
 const bodyParser = require("body-parser");
 const DocumentRepository = require("./repositories/documentRepository");
-const Document = require("./models/document");
-const marked = require("marked");
 const SearchProvider = require("./providers/searchProvider");
 const HomeController = require("./controllers/homeController");
+const DocumentController = require("./controllers/documentController");
 const AnalyticsService = require("./services/analyticsService");
+const SearchController = require("./controllers/searchController");
 
 let defaultConfig = require("./config.default.js");
 
@@ -34,9 +34,10 @@ class Hazel {
 
         this.setupServer();
 
+        /* Controllers */
         this._homeController = new HomeController(this._server, this._documentRepository, this._searchProvider, this._analyticsService);
-
-        this.defineRoutes();
+        this._searchController = new SearchController(this._server, this._searchProvider);
+        this._documentController = new DocumentController(this._server, this._documentRepository, this._analyticsService, this._storageProvider, this._searchProvider);
     }
 
     /**
@@ -68,80 +69,6 @@ class Hazel {
         this._server.use(favicon(this.config.public_dir + "/favicon.ico"));
         this._server.use(express.static(this.config.public_dir));
         this._server.use(bodyParser.urlencoded({ extended: false }));
-    }
-
-    /**
-     * Defines all routes for Hazel
-     */
-    defineRoutes() {
-        // /[page]/edit
-        this._server.get("/:slug/edit", this.onEditRequest.bind(this));
-        // /[page]/save
-        this._server.post("/:slug/save", this.onSaveEditRequest.bind(this));
-        // /[page]
-        this._server.get("/:slug", this.onDefaultRequest.bind(this));
-        // /[anything else]
-        this._server.get("*", (req, res, next) => next());
-    }
-
-    /**
-     * Default Request Handler
-     */
-    onDefaultRequest(req, res, next) {
-        if (!req.params.slug) next();
-
-        let slug = req.params.slug;
-        let document = this._documentRepository.get(slug);
-
-        // check if no content
-        if (!document || document.markdown <= 0) {
-            res.render("404", { title: this._storageProvider.slugToTitle(slug) });
-            return;
-        }
-
-        this._analyticsService.updateViewCount(slug);
-        document.html = marked(document.markdown);
-        // render content
-        res.render("document", document);
-    }
-
-    /**
-     * Handle edit request
-     */
-    onEditRequest(req, res, next) {
-        if (!req.params.slug) next();
-
-        let slug = req.params.slug;
-        console.log("editing: " + slug);
-
-        let document = this._documentRepository.get(slug);
-        if (!document) {
-            document = new Document();
-            document.slug = slug;
-            document.title = this._storageProvider.slugToTitle(slug);
-        }
-
-        res.render("edit", document);
-    }
-
-    /**
-     * Handle edit request
-     */
-    onSaveEditRequest(req, res, next) {
-        if (!req.params.slug) next();
-
-        let slug = req.params.slug;
-
-        let document = new Document();
-        document.title = req.body.title;
-        document.markdown = req.body.content;
-        document.tags = req.body.tags.split(",");
-        document.slug = slug;
-
-        console.log("save: " + document.title);
-        this._documentRepository.update(document);
-
-        res.redirect("/" + slug);
     }
 }
 

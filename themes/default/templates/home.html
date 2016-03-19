@@ -11,9 +11,9 @@
                     <div class="live-search ">
                         <form role="search " method="get" id="searchform " class="form-search " action="/search">
                             <div class="input-group">
-                                <input type="text" id="autocomplete-ajax " name="s" id="s" class="searchajax search-query form-control" autocomplete="off " placeholder="Search for content here...">
+                                <input type="text" id="autocomplete-ajax" name="s" id="s" class="searchajax search-query form-control" autocomplete="off " placeholder="Search for content here...">
                                 <span class="input-group-btn ">
-                                <input type="submit " id="searchsubmit " value="Search " class="btn btn-primary ">
+                                    <input type="submit" value="Search" class="btn btn-primary">
                                 </span>
                             </div>
                         </form>	
@@ -23,8 +23,8 @@
                     
                     <% if(popularSearches && popularSearches.length > 0){ %>
                         <p class="top-searches ">Popular searches:
-                        <% for(var search in popularSearches){ %>
-                            <a href="/search?s=<%= encodeURIComponent(search) %>"><%= search %></a>
+                        <% for(var i = 0; i < popularSearches.length; i++){ var search = popularSearches[i]; %>
+                            <a href="/search?s=<%= encodeURIComponent(search) %>"><%= search + ((i != popularSearches.length -1) ? "," : "") %></a>
                         <% } %>
                         </p>
                     <% } %>

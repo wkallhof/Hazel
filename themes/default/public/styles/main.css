@@ -5955,7 +5955,7 @@ aside .widget h3 {
 }
 .content-info {
     font-size: 0.9em;
-    padding-top: 80px;
+    /*padding-top: 80px;*/
     padding-bottom: 20px
 }
 .content-info .widget>h3 {
