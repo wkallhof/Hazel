@@ -1,6 +1,5 @@
 "use strict";
 
-const DocumentParserUtility = require("../utilities/documentParserUtility");
 const fs = require("fs");
 const _ = require("lodash");
 const path = require("path");
@@ -14,9 +13,9 @@ const _s = require("underscore.string");
  */
 class StorageProvider {
 
-    constructor(config) {
+    constructor(config, parserUtility) {
         this._config = config;
-        this._parser = new DocumentParserUtility();
+        this._parser = parserUtility;
     }
 
     /**

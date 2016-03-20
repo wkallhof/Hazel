@@ -15,6 +15,7 @@ const DocumentController = require("./controllers/documentController");
 const AnalyticsService = require("./services/analyticsService");
 const SearchController = require("./controllers/searchController");
 const NotFoundController = require("./controllers/notFoundController");
+const DocumentParserUtility = require("./utilities/documentParserUtility");
 
 let defaultConfig = require("./config.default.js");
 
@@ -28,7 +29,8 @@ class Hazel {
 
         if (config) { extend(this.config, config); }
 
-        this._storageProvider = new StorageProvider(this.config);
+        this._documentParserUtility = new DocumentParserUtility();
+        this._storageProvider = new StorageProvider(this.config, this._documentParserUtility);
         this._documentRepository = new DocumentRepository(this._storageProvider);
         this._searchProvider = new SearchProvider(this._documentRepository);
         this._analyticsService = new AnalyticsService(this._storageProvider);
@@ -38,7 +40,7 @@ class Hazel {
         /* Controllers */
         this._homeController = new HomeController(this._server, this._documentRepository, this._searchProvider, this._analyticsService);
         this._searchController = new SearchController(this._server, this._searchProvider);
-        this._documentController = new DocumentController(this._server, this._documentRepository, this._analyticsService, this._storageProvider, this._searchProvider);
+        this._documentController = new DocumentController(this._server, this._documentRepository, this._analyticsService, this._storageProvider, this._searchProvider, this._documentParserUtility);
         this._notFoundController = new NotFoundController(this._server, this._storageProvider);
     }
 

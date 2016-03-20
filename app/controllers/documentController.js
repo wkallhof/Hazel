@@ -2,14 +2,16 @@
 
 const marked = require("marked");
 const Document = require("../models/document");
+const _ = require("lodash");
 
 class DocumentController {
-    constructor(server, documentRepository, analyticsService, storageProvider, searchProvider) {
+    constructor(server, documentRepository, analyticsService, storageProvider, searchProvider, parserUtility) {
         this._server = server;
         this._documents = documentRepository;
         this._analyticsService = analyticsService;
         this._storageProvider = storageProvider;
         this._searchProvider = searchProvider;
+        this._parserUtility = parserUtility;
 
         this.bindRoutes();
     }
@@ -80,6 +82,18 @@ class DocumentController {
         document.markdown = req.body.content;
         document.tags = req.body.tags.split(",");
         document.slug = slug;
+
+        // check for links to set
+        var missingLinks = this._parserUtility.fetchMissingLinksFromMarkdown(document.markdown);
+        if (missingLinks.length > 0) {
+            var pairs = _.chunk(missingLinks, 2);
+
+            _.forEach(pairs, (pair) => {
+                let doc = _.find(this._documents.all(), { "title": pair[1] });
+                if (!doc) return;
+                document.markdown = document.markdown.replace(pair[0], pair[0].replace("()", "(/" + doc.slug + ")"));
+            });
+        }
 
         // save document
         console.log("save: " + document.title);

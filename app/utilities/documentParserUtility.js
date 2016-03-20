@@ -10,6 +10,7 @@ class DocumentParserUtility {
 
     constructor() {
         this._metaRegex = /<!--META (.*) -->/;
+        this._missingLinkRegex = /\[(.*)\]\(\)/;
     }
 
     /**
@@ -71,6 +72,15 @@ class DocumentParserUtility {
         let commentString = "<!--META " + metaString + " -->";
 
         return commentString + "\n" + document.markdown;
+    }
+
+    /**
+     * Handles fetching the missing links from the markdown
+     */
+    fetchMissingLinksFromMarkdown(markdown) {
+        if (!markdown || !markdown.length > 0) return [];
+
+        return markdown.match(this._missingLinkRegex);
     }
 }
 
