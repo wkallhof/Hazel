@@ -1,0 +1,88 @@
+body {
+  font: 20px/1.5 'Ubuntu', sans-serif;
+  color: #F0E7D5;
+  background: #555 url('asphalt.png');
+  text-align: center;
+  margin: 0;
+}
+
+header, footer {
+  font-size: 18px;
+  padding: 0 20px;
+}
+
+header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #000;
+  margin: 30px 0 0;
+}
+
+header > p {
+  margin: 2px;
+}
+
+main {
+  padding: 10px 20px;
+  border-top: 1px solid #666;
+  border-bottom: 1px solid #000;
+}
+
+footer {
+  border-top: 1px solid #666;
+}
+
+a:link, a:visited {
+  color: #78B642;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.fork {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 0;
+}
+
+.logo {
+  width: 50%;
+  max-width: 400px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px dashed #555;
+}
+
+/* Customize scrollbars in webkit */
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: #222;
+    box-shadow: 0 0 1px #000 inset;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #444;
+    box-shadow: 0 0 6px #000 inset;
+}
+
+/* Play nice with small devices */
+
+@media screen and (max-width: 300px) {
+  .fork {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  main {
+    text-align: left;
+  }
+}
