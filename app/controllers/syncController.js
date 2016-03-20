@@ -148,11 +148,10 @@ class SyncController {
      * Validates the provided key
      */
     validateKey(res, key) {
-        if (!key === this._config.sync_key) {
-            res.json({ "Error": "Invalid Sync Key" });
-            return false;
-        }
-        return true;
+        if (key === this._config.sync_key) return true;
+
+        res.json({ message: "Invalid Sync Key" });
+        return false;
     }
 }
 
