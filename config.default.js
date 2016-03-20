@@ -27,7 +27,10 @@ var config = {
   // The base URL of your images folder,
   // Relative to config.public_dir
   // (can use %image_url% in Markdown files)
-    image_url: "/images"
+    image_url: "/images",
+
+    // Key used to sync two servers
+    sync_key: "c77f12db-961f-4cf3-8599-64159a4fbf29"
 };
 
 // Exports

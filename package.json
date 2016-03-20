@@ -25,6 +25,7 @@
       "underscore.string": "^2.3.3",
       "body-parser": "1.15.0",
       "lodash":"4.6.1",
-      "lunr": "0.7.0"
+      "lunr": "0.7.0",
+      "request": "2.69.0"
   }
 }
