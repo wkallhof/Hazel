@@ -2,6 +2,7 @@
 
 const marked = require("marked");
 const Document = require("../models/document");
+const DetailViewModel = require("../models/detailViewModel");
 const _ = require("lodash");
 
 class DocumentController {
@@ -35,6 +36,7 @@ class DocumentController {
     detail(req, res, next) {
         if (!req.params.slug) { next(); return; }
 
+        let viewModel = new DetailViewModel();
         let slug = req.params.slug;
         let document = this._documents.get(slug);
 
@@ -43,8 +45,13 @@ class DocumentController {
 
         this._analyticsService.updateViewCount(slug);
         document.html = marked(document.markdown);
+
+        viewModel.document = document;
+        viewModel.title = document.title;
+        viewModel.relatedDocuments = this.fetchRelatedDocuments(viewModel.title, 5);
+        viewModel.recentDocuments = this.fetchRecentDocuments(5);
         // render content
-        res.render("document", document);
+        res.render("document", viewModel);
     }
 
     /**
@@ -85,7 +92,7 @@ class DocumentController {
 
         // check for links to set
         var missingLinks = this._parserUtility.fetchMissingLinksFromMarkdown(document.markdown);
-        if (missingLinks.length > 0) {
+        if (missingLinks && missingLinks.length > 0) {
             var pairs = _.chunk(missingLinks, 2);
 
             _.forEach(pairs, (pair) => {
@@ -140,6 +147,30 @@ class DocumentController {
         document.title = "New document";
 
         res.render("edit", document);
+    }
+
+    /**
+     * Fetch the most recent documents
+     */
+    fetchRecentDocuments(count) {
+        let documents = this._documents.all();
+
+        return _.chain(documents)
+            .reject({"updateDate": null})
+            .sortBy("updateDate")
+            .reverse()
+            .take(count)
+            .value();
+    }
+
+    /**
+     * Fetch the related documents
+     */
+    fetchRelatedDocuments(title, count) {
+        return _.chain(this._searchProvider.search(title))
+            .reject({ "title": title })
+            .take(count)
+            .value();
     }
 }
 
