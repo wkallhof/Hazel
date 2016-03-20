@@ -41,7 +41,7 @@ SyncPage.prototype = {
 
     /**
      * Handles the event when the user clicks the start button
-     */    
+     */
     onStartClick: function(e) {
         e.preventDefault();
         this.$startButton.prop("disabled", "disabled");
