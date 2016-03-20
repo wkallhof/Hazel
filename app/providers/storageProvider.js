@@ -16,6 +16,19 @@ class StorageProvider {
     constructor(config, parserUtility) {
         this._config = config;
         this._parser = parserUtility;
+
+        this.createDirectories();
+    }
+
+    /**
+     * Handles creating directories
+     * for storing data and content
+     */
+    createDirectories() {
+        try {
+            fs.mkdirSync(this._config.content_dir);
+            fs.mkdirSync(this._config.data_dir);
+        } catch (e) { /* Do nothing */ }
     }
 
     /**
