@@ -4,10 +4,11 @@ const _ = require("lodash");
 const request = require("request");
 
 class SyncController {
-    constructor(server, config, documentRepository) {
+    constructor(server, config, documentRepository, searchProvider) {
         this._server = server;
         this._config = config;
         this._documents = documentRepository;
+        this._searchProvider = searchProvider;
 
         this.bindRoutes();
     }
@@ -128,12 +129,16 @@ class SyncController {
         // handle new document
         if (!matchingDocument) {
             this._documents.add(newDoc);
+            this._searchProvider.indexAdd(newDoc);
+
             res.json({ message: "Added new document: " + newDoc.title });
             return;
 
         // handle existing and newer document
         } else if (newDoc.updateDate > matchingDocument.updateDate) {
             this._documents.update(newDoc);
+            this._searchProvider.indexUpdate(newDoc);
+
             res.json({ message: "Found newer document, updating: " + newDoc.title });
             return;
 
