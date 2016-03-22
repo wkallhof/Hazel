@@ -22,8 +22,9 @@ EditPage.constructor = EditPage;
 EditPage.prototype = {
     bind: function() {
         // bind auto size
-        autosize(this.$markdownInput);
+        // autosize(this.$markdownInput);
 
+        var simplemde = new SimpleMDE();
         this.$titleInput.on("input propertychange paste", this.onTitleInputChange.bind(this));
         this.$deleteButton.on("click", this.onDeleteClick.bind(this));
     },

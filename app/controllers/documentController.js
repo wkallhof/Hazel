@@ -96,9 +96,8 @@ class DocumentController {
             var pairs = _.chunk(missingLinks, 2);
 
             _.forEach(pairs, (pair) => {
-                let doc = _.find(this._documents.all(), { "title": pair[1] });
-                if (!doc) return;
-                document.markdown = document.markdown.replace(pair[0], pair[0].replace("()", "(/" + doc.slug + ")"));
+                let slug = this._storageProvider.titleToSlug(pair[1]);
+                document.markdown = document.markdown.replace(pair[0], pair[0].replace("()", "(/" + slug + ")"));
             });
         }
 
