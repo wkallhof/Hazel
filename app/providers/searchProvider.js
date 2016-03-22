@@ -34,12 +34,20 @@ class SearchProvider {
     }
 
     /**
-     * Will do a document search with the given search term
+     * Updates term search count and does document search for the provided
+     * search term.
      * @param term [string] - term to search for within documents
      */
     search(term) {
         this.updateTermCount(term);
+        this.internalSearch(term);
+    }
 
+    /**
+     * Will do a document search with the given search term
+     * @param term [string] - term to search for within documents
+     */
+    internalSearch(term) {
         let results = this._index.search(term);
 
         // map the results to the documents and create excerpts

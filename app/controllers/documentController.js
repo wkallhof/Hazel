@@ -166,7 +166,7 @@ class DocumentController {
      * Fetch the related documents
      */
     fetchRelatedDocuments(title, count) {
-        return _.chain(this._searchProvider.search(title))
+        return _.chain(this._searchProvider.internalSearch(title))
             .reject({ "title": title })
             .take(count)
             .value();
