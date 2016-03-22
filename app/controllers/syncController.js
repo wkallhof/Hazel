@@ -2,6 +2,7 @@
 
 const _ = require("lodash");
 const request = require("request");
+const base64 = require("base-64");
 
 class SyncController {
     constructor(server, config, documentRepository, searchProvider) {
@@ -81,7 +82,11 @@ class SyncController {
 
         if (!this.validateKey(res, req.params.key)) return;
 
-        let endpoint = req.params.server + "/sync-target/" + req.params.key + "/" + req.params.slug;
+        // decode base64 encoded server
+        let server = base64.decode(req.params.server);
+        server = server.replace(/\/$/, "");
+
+        let endpoint = server + "/sync-target/" + req.params.key + "/" + req.params.slug;
 
         request(endpoint, function(error, response, body) {
             if (!error && response.statusCode === 200) {
@@ -102,7 +107,11 @@ class SyncController {
 
         if (!this.validateKey(res, req.params.key)) return;
 
-        let endpoint = req.params.server + "/sync-target/" + req.params.key;
+        // decode base64 encoded server
+        let server = base64.decode(req.params.server);
+        server = server.replace(/\/$/, "");
+
+        let endpoint = server + "/sync-target/" + req.params.key;
 
         request(endpoint, function(error, response, body) {
             if (!error && response.statusCode === 200) {

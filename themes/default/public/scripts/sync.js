@@ -58,7 +58,7 @@ SyncPage.prototype = {
         var key = this.$keyInput.val();
 
         var baseUrl = window.location.protocol + "//" + window.location.host;
-        this.syncUrl = baseUrl + "/sync-request/" + encodeURIComponent(key) + "/" + encodeURIComponent(server);
+        this.syncUrl = baseUrl + "/sync-request/" + encodeURIComponent(key) + "/" + btoa(server);
 
         var request = $.get(this.syncUrl, this.requestListResponse.bind(this))
             .fail(function(error) {
