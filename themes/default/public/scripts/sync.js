@@ -61,8 +61,10 @@ SyncPage.prototype = {
         this.syncUrl = baseUrl + "/sync-request/" + encodeURIComponent(key) + "/" + encodeURIComponent(server);
 
         var request = $.get(this.syncUrl, this.requestListResponse.bind(this))
-            .fail(function() {
-                this.addMessage("Unable to reach the provided endpoint");
+            .fail(function(error) {
+                this.addMessage("Unable to reach the provided endpoint: " +
+                     error.responseText +
+                    " Status: " + error.status + " " + error.statusText);
                 this.finish();
             }.bind(this));
 
