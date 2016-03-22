@@ -42,6 +42,7 @@ class DocumentRepository {
         if (!existing) {
             document.createDate = Date.now();
             document.updateDate = document.createDate;
+            document.tags = document.tags || [];
             this._storageProvider.storeDocument(document);
             this._documents.push(document);
         }
@@ -55,6 +56,7 @@ class DocumentRepository {
         if (index >= 0) {
             this._documents[index] = document;
             this._documents[index].updateDate = Date.now();
+            this._documents[index].tags = document.tags || [];
             this._storageProvider.storeDocument(this._documents[index]);
         } else {
             this.add(document);
