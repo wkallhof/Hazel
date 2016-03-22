@@ -40,7 +40,7 @@ class SearchProvider {
      */
     search(term) {
         this.updateTermCount(term);
-        this.internalSearch(term);
+        return this.internalSearch(term);
     }
 
     /**
