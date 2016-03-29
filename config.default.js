@@ -30,7 +30,14 @@ var config = {
     image_url: "/images",
 
     // Key used to sync two servers
-    sync_key: "c77f12db-961f-4cf3-8599-64159a4fbf29"
+    sync_key: "c77f12db-961f-4cf3-8599-64159a4fbf29",
+
+    // Set to true to enable HTTP Basic Authentication
+    authentication: true,
+    credentials: {
+        username: "wkallhof",
+        password: "password"
+    }
 };
 
 // Exports
