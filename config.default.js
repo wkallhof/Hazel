@@ -36,7 +36,7 @@ var config = {
     authentication: true,
     credentials: {
         username: "wkallhof",
-        password: "password"
+        password: "M@xrogers1"
     }
 };
 
