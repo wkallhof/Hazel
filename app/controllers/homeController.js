@@ -4,8 +4,9 @@ const HomeViewModel = require("../models/homeViewModel");
 const _ = require("lodash");
 
 class HomeController {
-    constructor(server, documentRepository, searchProvider, analyticsService) {
+    constructor(server, authMethod, documentRepository, searchProvider, analyticsService) {
         this._documents = documentRepository;
+        this._auth = authMethod;
         this._server = server;
         this._searchProvider = searchProvider;
         this._analyticsService = analyticsService;
@@ -15,7 +16,7 @@ class HomeController {
 
     bindRoutes() {
         // /
-        this._server.get("/", this.index.bind(this));
+        this._server.get("/", this._auth, this.index.bind(this));
     }
 
     /**

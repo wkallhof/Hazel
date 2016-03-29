@@ -7,8 +7,9 @@ const NotFoundViewModel = require("../models/notFoundViewModel");
  * one of the last controllers in the pipeline
  */
 class NotFoundController {
-    constructor(server, storageProvider) {
+    constructor(server, authMethod, storageProvider) {
         this._server = server;
+        this._auth = authMethod;
         this._storageProvider = storageProvider;
 
         this.bindRoutes();
@@ -16,7 +17,7 @@ class NotFoundController {
 
     bindRoutes() {
         // /[slug]
-        this._server.get("/:slug", this.index.bind(this));
+        this._server.get("/:slug", this._auth, this.index.bind(this));
     }
 
     /**

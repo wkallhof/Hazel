@@ -40,12 +40,15 @@ class Hazel {
 
         this.setupServer();
 
+        // define our authentication method with proper binding
+        let authMethod = this._authProvider.authenticate.bind(this._authProvider);
+
         /* Controllers */
-        this._homeController = new HomeController(this._server, this._documentRepository, this._searchProvider, this._analyticsService);
-        this._searchController = new SearchController(this._server, this._searchProvider);
-        this._documentController = new DocumentController(this._server, this._documentRepository, this._analyticsService, this._storageProvider, this._searchProvider, this._documentParserUtility);
-        this._syncController = new SyncController(this._server, this.config, this._documentRepository, this._searchProvider);
-        this._notFoundController = new NotFoundController(this._server, this._storageProvider);
+        this._homeController = new HomeController(this._server, authMethod, this._documentRepository, this._searchProvider, this._analyticsService);
+        this._searchController = new SearchController(this._server, authMethod, this._searchProvider);
+        this._documentController = new DocumentController(this._server, authMethod, this._documentRepository, this._analyticsService, this._storageProvider, this._searchProvider, this._documentParserUtility);
+        this._syncController = new SyncController(this._server, authMethod, this.config, this._documentRepository, this._searchProvider);
+        this._notFoundController = new NotFoundController(this._server, authMethod, this._storageProvider);
     }
 
     /**

@@ -22,8 +22,8 @@ class AuthenticationProvider {
 
         // check user info
         if (!user || !user.name || !user.pass ||
-            !user.name === this._config.credentials.username ||
-            !user.password === this._config.credentials.password) {
+            user.name !== this._config.credentials.username ||
+            user.pass !== this._config.credentials.password) {
             return this.unauthorized(req, res, next);
         }
 

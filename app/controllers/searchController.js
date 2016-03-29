@@ -3,8 +3,9 @@
 const SearchViewModel = require("../models/searchViewModel");
 
 class SearchController {
-    constructor(server, searchProvider) {
+    constructor(server, authMethod, searchProvider) {
         this._server = server;
+        this._auth = authMethod;
         this._searchProvider = searchProvider;
 
         this.bindRoutes();
@@ -12,7 +13,7 @@ class SearchController {
 
     bindRoutes() {
         // /search
-        this._server.get("/search", this.index.bind(this));
+        this._server.get("/search", this._auth, this.index.bind(this));
     }
 
     /**

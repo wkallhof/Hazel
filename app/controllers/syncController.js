@@ -5,8 +5,9 @@ const request = require("request");
 const base64 = require("base-64");
 
 class SyncController {
-    constructor(server, config, documentRepository, searchProvider) {
+    constructor(server, authMethod, config, documentRepository, searchProvider) {
         this._server = server;
+        this._auth = authMethod;
         this._config = config;
         this._documents = documentRepository;
         this._searchProvider = searchProvider;
@@ -16,7 +17,7 @@ class SyncController {
 
     bindRoutes() {
         // /sync
-        this._server.get("/sync", this.index.bind(this));
+        this._server.get("/sync", this._auth, this.index.bind(this));
 
         // /sync-target/[Key]/[Doc Slug]
         this._server.get("/sync-target/:key/:slug", this.returnSingle.bind(this));

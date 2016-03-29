@@ -6,8 +6,9 @@ const DetailViewModel = require("../models/detailViewModel");
 const _ = require("lodash");
 
 class DocumentController {
-    constructor(server, documentRepository, analyticsService, storageProvider, searchProvider, parserUtility) {
+    constructor(server, authMethod, documentRepository, analyticsService, storageProvider, searchProvider, parserUtility) {
         this._server = server;
+        this._auth = authMethod;
         this._documents = documentRepository;
         this._analyticsService = analyticsService;
         this._storageProvider = storageProvider;
@@ -19,15 +20,15 @@ class DocumentController {
 
     bindRoutes() {
          // /[slug]/edit
-        this._server.get("/:slug/edit", this.edit.bind(this));
+        this._server.get("/:slug/edit", this._auth, this.edit.bind(this));
         // /[slug]/delete
-        this._server.get("/:slug/delete", this.delete.bind(this));
+        this._server.get("/:slug/delete", this._auth, this.delete.bind(this));
         // /[slug]/save
-        this._server.post("/:slug/save", this.save.bind(this));
+        this._server.post("/:slug/save", this._auth, this.save.bind(this));
         // /new
-        this._server.get("/new", this.new.bind(this));
+        this._server.get("/new", this._auth, this.new.bind(this));
         // /[slug]
-        this._server.get("/:slug", this.detail.bind(this));
+        this._server.get("/:slug", this._auth, this.detail.bind(this));
     }
 
     /**
