@@ -1,11 +1,12 @@
 {
-  "name": "hazel",
+  "name": "hazel-wiki",
   "version": "1.0.0",
   "description": "Fast, simple, Markdown powered wiki knowledge base",
   "author": "Wade Kallhoff <w@wmk.io>",
   "license": "MIT",
   "keywords": [
     "hazel",
+    "hazel-wiki",
     "wiki",
     "markdown",
     "knowledge",
