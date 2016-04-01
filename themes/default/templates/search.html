@@ -1,5 +1,5 @@
 <div class="before-main-wrapper">
-    <div class="header-wrapper"" data-vide-options="posterType: none">
+    <div class="header-wrapper">
         <div class="container header-left">
             <div class="header-titles">
                 <h1>Search Results for "<%= searchTerm %>"</h1>
@@ -13,7 +13,7 @@
             <main class="main col-sm-8"  role="main">
                 <% if(results && results.length > 0){ %>
                     <% for(var i = 0; i < results.length; i++){ var result = results[i]; %>
-                    <article class="post-768 post type-post status-publish format-video hentry category-video-tutorials post_format-post-format-video">
+                    <article class="post type-post">
                         <header>
                             <h2 class="entry-title">
                                 <a href="/<%= result.slug %>"><%= result.title %></a>
@@ -30,17 +30,6 @@
                 <% } %>
                 
                 <!-- PAGINATION -->
-                
-                <!--<nav class="pagination">
-                    <ul class="page-numbers pagination">
-                        <li class='active current'><span class='page-numbers current'>1</span></li>
-                        <li><a class='page-numbers' href='http://themes.pressapps.io/knowledgepress-1/search/s/page/2/'>2</a></li>
-                        <li><a class='page-numbers' href='http://themes.pressapps.io/knowledgepress-1/search/s/page/3/'>3</a></li>
-                        <li><a class='page-numbers' href='http://themes.pressapps.io/knowledgepress-1/search/s/page/4/'>4</a></li>
-                        <li><a class='page-numbers' href='http://themes.pressapps.io/knowledgepress-1/search/s/page/5/'>5</a></li>
-                        <li><a class="next page-numbers" href="http://themes.pressapps.io/knowledgepress-1/search/s/page/2/"><i class="kp-arrow-right4"></i></a></li>
-                    </ul>
-                </nav>-->
             </main>
             <!-- /.main -->
         </div>

@@ -1,19 +1,18 @@
 {
   "name": "hazel",
-  "version": "0.0.1",
-  "description": "Markdown powered Wiki",
-  "author": {
-    "name": "Wade Kallhoff",
-    "email": "w@wmk.io"
-  },
+  "version": "1.0.0",
+  "description": "Fast, simple, Markdown powered wiki knowledge base",
+  "author": "Wade Kallhoff <w@wmk.io>",
   "license": "MIT",
   "keywords": [
     "hazel",
     "wiki",
-    "markdown"
+    "markdown",
+    "knowledge",
+    "base"
   ],
   "engines": {
-    "node": ">=0.10.x"
+    "node": ">=0.10.0"
   },
   "dependencies": {
       "express": "4.13.4",
@@ -30,8 +29,10 @@
       "base-64": "0.1.0",
       "basic-auth": "1.0.3"
   },
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js"
-  }
+  "files": [
+    "index.js",
+    "app/",
+    "themes/"
+  ],
+  "main": "index.js"
 }

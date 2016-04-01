@@ -21,20 +21,7 @@
                     <div class="entry-content js-page">
                         <div class="toc" style="display:none;"></div>
                         <%- document.html %>
-                    </div>
-
-                    <!--<div id="related" class="clearfix">
-                        <h3>Related Articles</h3>
-                        <ul class="clearfix">
-                            <li class="list-post pa-post-format"><i class="kp-w kp-file-text2"></i> <a href="http://themes.pressapps.io/knowledgepress-1/2013/01/12/standard-post-format/">Standard Post Format</a></li>
-                            <li class="list-post pa-post-format"><i class="kp-w kp-file-text2"></i> <a href="http://themes.pressapps.io/knowledgepress-1/2013/01/12/disabled-comments/">Disabled Comments</a></li>
-                            <li class="list-post pa-post-format"><i class="kp-w kp-file-text2"></i> <a href="http://themes.pressapps.io/knowledgepress-1/2013/01/12/unlimited-theme-colors/">Theme Set Up</a></li>
-                            <li class="list-post pa-post-format"><i class="kp-w kp-file-text2"></i> <a href="http://themes.pressapps.io/knowledgepress-1/2012/11/05/flat-rate-shipping/">Unlimited Colors</a></li>
-                            <li class="list-post pa-post-format"><i class="kp-w kp-file-text2"></i> <a href="http://themes.pressapps.io/knowledgepress-1/2012/11/05/local-pickup/">Well Documented</a></li>
-                            <li class="list-post pa-post-format"><i class="kp-w kp-film3"></i> <a href="http://themes.pressapps.io/knowledgepress-1/2012/11/05/multiple-ship-to-addresses/">Multiple Ship to Addresses</a></li>
-                        </ul>
-                    </div>-->
-                    
+                    </div>                    
                 </article>
             </main>
             
@@ -43,7 +30,7 @@
                 
                 <% if(relatedDocuments && relatedDocuments.length > 0){ %>
                 <!-- RELATED DOCUMENTS -->
-                <section id="custom-recent-posts-2" class="widget widget_recent_entries">
+                <section class="widget widget_recent_entries">
                     <h3 class="widget-title">Related Documents</h3>
                     <ul>
                         <% for(var i = 0; i < relatedDocuments.length ; i++){ var relatedDocument = relatedDocuments[i]; %>
@@ -57,7 +44,7 @@
                 
                 <% if(recentDocuments && recentDocuments.length > 0){ %>
                 <!-- RECENT DOCUMENTS -->
-                <section id="custom-recent-posts-2" class="widget widget_recent_entries">
+                <section class="widget widget_recent_entries">
                     <h3 class="widget-title">Recent Documents</h3>
                     <ul>
                         <% for(var i = 0; i < recentDocuments.length ; i++){ var recentDocument = recentDocuments[i]; %>

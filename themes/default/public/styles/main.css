@@ -5584,33 +5584,7 @@ img {
 .social-share .btn-default.social-share-main:hover {
     color: #fff
 }
-.autocomplete-suggestions {
-    border: 1px solid rgba(52, 73, 94, 0.1);
-    background: #FFF;
-    cursor: default;
-    overflow: auto;
-    overflow-y: scroll;
-    overflow-x: hidden
-}
-.autocomplete-suggestion {
-    padding: .9em .8em .9em 2.3em;
-    overflow: hidden;
-    line-height: 1.5em;
-    border-bottom: 1px solid rgba(52, 73, 94, 0.05)
-}
-.autocomplete-suggestion i {
-    margin-left: -1.6em
-}
-.autocomplete-suggestion h4 {
-    font-size: 16px;
-    line-height: 1.5em;
-    margin: 0;
-    font-weight: 400;
-    display: inline
-}
-.autocomplete-selected {
-    background: WhiteSmoke
-}
+
 .navbar-default {
     border: none;
     min-height: 70px

@@ -1,5 +1,3 @@
 node_modules
-content
-static
-data
-ngrok
+.vscode/
+.DS_Store
