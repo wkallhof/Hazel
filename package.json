@@ -1,9 +1,11 @@
 {
   "name": "hazel-wiki",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Fast, simple, Markdown powered wiki knowledge base",
   "author": "Wade Kallhoff <w@wmk.io>",
-  "license": "MIT",
+  "license": "GNU 3",
+  "repository": "wkallhof/hazel",
+  "homepage": "https://github.com/wkallhof/Hazel",
   "keywords": [
     "hazel",
     "hazel-wiki",
@@ -31,6 +33,8 @@
       "basic-auth": "1.0.3"
   },
   "files": [
+    "LICENSE",
+    "README.md",
     "index.js",
     "app/"
   ],
