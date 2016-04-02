@@ -18,6 +18,8 @@ class DocumentParserUtility {
      * a document object;
      */
     getDocumentFromFileContent(fileContent) {
+        if (fileContent == null || fileContent.length <= 0) return null;
+
         let metaData = this.extractMetaData(fileContent);
         let markdown = this.extractContent(fileContent);
 
@@ -31,6 +33,9 @@ class DocumentParserUtility {
         }
 
         if (markdown) {
+            if (markdown.startsWith("\n")) {
+                markdown = markdown.substring(1);
+            }
             document.markdown = markdown;
         }
 
@@ -61,6 +66,8 @@ class DocumentParserUtility {
      * string
      */
     convertDocumentToFileContent(document) {
+        if (document == null) return null;
+
         let metaData = {
             title: document.title,
             tags: document.tags,
@@ -80,7 +87,7 @@ class DocumentParserUtility {
     fetchMissingLinksFromMarkdown(markdown) {
         if (!markdown || !markdown.length > 0) return [];
 
-        return markdown.match(this._missingLinkRegex);
+        return markdown.match(this._missingLinkRegex) || [];
     }
 }
 
