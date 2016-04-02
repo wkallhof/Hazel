@@ -32,11 +32,20 @@
       "base-64": "0.1.0",
       "basic-auth": "1.0.3"
   },
+  "devDependencies": {
+    "istanbul": "0.4.2",
+    "mocha": "2.3.4",
+    "chai": "3.5.0"
+  },
   "files": [
     "LICENSE",
     "README.md",
     "index.js",
     "app/"
   ],
-  "main": "index.js"
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "test-cov": "istanbul cover node_modules/mocha/bin/_mocha"
+  }
 }
