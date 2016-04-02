@@ -1,0 +1,7 @@
+language: node_js
+node_js:
+  - "5.8.0"
+sudo: false
+before_install: "npm rm --save-dev connect-redis"
+script: "npm run-script test-ci"
+after_script: "npm install coveralls@2.10.0 && cat ./coverage/lcov.info | coveralls"
