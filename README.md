@@ -59,5 +59,5 @@ The author of Hazel is [Wade Kallhoff](https://github.com/wkallhof)
 [travis-url]: https://travis-ci.org/wkallhof/Hazel
 [appveyor-image]: https://img.shields.io/appveyor/ci/wkallhof/hazel/master.svg?label=windows
 [appveyor-url]: https://ci.appveyor.com/project/wkallhof/hazel
-[coveralls-image]: https://img.shields.io/coveralls/wkallhof/hazel/master.svg
-[coveralls-url]: https://coveralls.io/r/wkallhof/hazel?branch=master
+[coveralls-image]: https://img.shields.io/coveralls/wkallhof/Hazel/master.svg
+[coveralls-url]: https://coveralls.io/r/wkallhof/Hazel?branch=master
