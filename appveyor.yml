@@ -1,0 +1,13 @@
+environment:
+  matrix:
+    - nodejs_version: "5.8.0"
+install:
+  - ps: Install-Product node $env:nodejs_version
+  - npm rm --save-dev connect-redis
+  - npm install
+build: off
+test_script:
+  - node --version
+  - npm --version
+  - npm run test-ci
+version: "{build}"
