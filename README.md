@@ -55,8 +55,8 @@ The author of Hazel is [Wade Kallhoff](https://github.com/wkallhof)
 [npm-url]: https://npmjs.org/package/hazel-wiki
 [downloads-image]: https://img.shields.io/npm/dm/hazel-wiki.svg
 [downloads-url]: https://npmjs.org/package/hazel-wiki
-[travis-image]: https://img.shields.io/travis/wkallhof/hazel/master.svg?label=linux
-[travis-url]: https://travis-ci.org/wkallhof/hazel
+[travis-image]: https://img.shields.io/travis/wkallhof/Hazel/master.svg?label=linux
+[travis-url]: https://travis-ci.org/wkallhof/Hazel
 [appveyor-image]: https://img.shields.io/appveyor/ci/wkallhof/hazel/master.svg?label=windows
 [appveyor-url]: https://ci.appveyor.com/project/wkallhof/hazel
 [coveralls-image]: https://img.shields.io/coveralls/wkallhof/hazel/master.svg
