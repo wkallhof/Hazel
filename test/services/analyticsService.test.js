@@ -54,9 +54,7 @@ var TestContainer = function() {
 
 /* MOCK STORAGE PROVIDER */
 var testStorageProvider = {
-    storeObject: function(name, data) {
-
-    },
+    storeObject: function(name, data) { },
 
     readObject: function(name) {
         return null;
