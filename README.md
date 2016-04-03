@@ -64,7 +64,7 @@ The author of Hazel is [Wade Kallhoff](https://github.com/wkallhof)
 
 ## License
 
-  [GNU3](LICENSE)
+  [GPL-3.0](LICENSE)
 
 [npm-image]: https://img.shields.io/npm/v/hazel-wiki.svg
 [npm-url]: https://npmjs.org/package/hazel-wiki
