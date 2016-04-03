@@ -33,15 +33,30 @@ $ npm install hazel-wiki
   * Auto-links to existing documents based on link text
   * Customizable templates utilizing EJS
 
-## Docs & Community
-
-## Quick Start
-
-## Philosophy
-
 ## Examples
 
+  To view the examples, clone the Hazel repo and install the dependencies:
+
+```bash
+$ git clone git://github.com/wkallhof/hazel.git --depth 1
+$ cd hazel
+$ npm install
+```
+
+  Then run the example provided:
+
+```bash
+$ node example/server.js
+```
+
 ## Tests
+
+  To run the test suite, first install the dependencies, then run `npm test`:
+
+```bash
+$ npm install
+$ npm test
+```
 
 ## People
 
