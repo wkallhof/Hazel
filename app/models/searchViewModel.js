@@ -8,6 +8,7 @@ class SearchViewModel {
         this.title = "Search";
         this.searchTerm = "";
         this.searchResults = [];
+        this.config = {};
     }
 }
 

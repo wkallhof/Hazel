@@ -10,6 +10,7 @@ class HomeViewModel {
         this.recentDocuments = [];
         this.randomDocuments = [];
         this.popularDocuments = [];
+        this.config = {};
     }
 }
 

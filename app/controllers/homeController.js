@@ -4,10 +4,11 @@ const HomeViewModel = require("../models/homeViewModel");
 const _ = require("lodash");
 
 class HomeController {
-    constructor(server, authMethod, documentRepository, searchProvider, analyticsService) {
+    constructor(server, config, authMethod, documentRepository, searchProvider, analyticsService) {
         this._documents = documentRepository;
         this._auth = authMethod;
         this._server = server;
+        this._config = config;
         this._searchProvider = searchProvider;
         this._analyticsService = analyticsService;
 
@@ -26,9 +27,10 @@ class HomeController {
         var viewModel = new HomeViewModel();
 
         viewModel.popularSearches = this._searchProvider.getPopularSearchTerms(5);
-        viewModel.recentDocuments = this.fetchRecentDocuments(5);
-        viewModel.randomDocuments = this.fetchRandomDocuments(5);
-        viewModel.popularDocuments = this.fetchPopularDocuments(5);
+        viewModel.recentDocuments = this._fetchRecentDocuments(5);
+        viewModel.randomDocuments = this._fetchRandomDocuments(5);
+        viewModel.popularDocuments = this._fetchPopularDocuments(5);
+        viewModel.config = this._config;
 
         res.render("home", viewModel);
     }
@@ -36,7 +38,7 @@ class HomeController {
     /**
      * Fetch the most recent documents
      */
-    fetchRecentDocuments(count) {
+    _fetchRecentDocuments(count) {
         let documents = this._documents.all();
 
         return _.chain(documents)
@@ -50,7 +52,7 @@ class HomeController {
     /**
      * Fetch random documents
      */
-    fetchRandomDocuments(count) {
+    _fetchRandomDocuments(count) {
         let documents = this._documents.all();
 
         return _.chain(documents)
@@ -62,7 +64,7 @@ class HomeController {
     /**
      * Fetch the most popular documents
      */
-    fetchPopularDocuments(count) {
+    _fetchPopularDocuments(count) {
         let documents = this._documents.all();
 
         return _.chain(documents)

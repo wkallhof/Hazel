@@ -3,9 +3,10 @@
 const _ = require("lodash");
 const request = require("request");
 const base64 = require("base-64");
+const SyncViewModel = require("../models/syncViewModel");
 
 class SyncController {
-    constructor(server, authMethod, config, documentRepository, searchProvider) {
+    constructor(server, config, authMethod, documentRepository, searchProvider) {
         this._server = server;
         this._auth = authMethod;
         this._config = config;
@@ -37,7 +38,12 @@ class SyncController {
      * Render the Sync page
      */
     index(req, res, next) {
-        res.render("sync", {title: "Sync Documents", syncKey: this._config.sync_key});
+        let viewModel = new SyncViewModel();
+        viewModel.title = "Sync Documents";
+        viewModel.syncKey = this._config.sync_key;
+        viewModel.config = this._config;
+
+        res.render("sync", viewModel);
     }
 
     /**

@@ -7,6 +7,7 @@ class NotFoundViewModel {
     constructor() {
         this.title = "";
         this.slug = "";
+        this.config = {};
     }
 }
 

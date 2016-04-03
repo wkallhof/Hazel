@@ -3,8 +3,9 @@
 const SearchViewModel = require("../models/searchViewModel");
 
 class SearchController {
-    constructor(server, authMethod, searchProvider) {
+    constructor(server, config, authMethod, searchProvider) {
         this._server = server;
+        this._config = config;
         this._auth = authMethod;
         this._searchProvider = searchProvider;
 
@@ -25,8 +26,10 @@ class SearchController {
         if (req.query.s) {
             let term = decodeURIComponent(req.query.s);
             viewModel.searchTerm = term;
-            viewModel.results = this._searchProvider.search(term);
+            viewModel.searchResults = this._searchProvider.search(term);
         }
+
+        viewModel.config = this._config;
 
         res.render("search", viewModel);
     }

@@ -1,3 +1,11 @@
+<!-- View Object 
+{
+    document = [document] Current document,
+    title = [string] Current title,
+    config = [config] Global config
+}
+-->
+
 <link rel="stylesheet" href="/vendor/simplemde/simplemde.min.css" type='text/css' media='all' />
 
 <!-- HEADER -->
@@ -12,28 +20,28 @@
 </div>
 
 <!-- CONTENT -->
-<div class="container wrap main-section js-editPage" id="wrap-main-section" data-slug="<%= slug %>">
+<div class="container wrap main-section js-editPage" id="wrap-main-section" data-slug="<%= document.slug %>">
     <div id="content" class="content">
         <div class="row">
-            <form action="/<%= slug %>/save" method="POST">
+            <form action="/<%= document.slug %>/save" method="POST">
                 <div class="form-group">
                     <label for="title">Title</label>
-                    <input type="text" class="form-control" id="title" name="title" placeholder="Title" value="<%= title === 'New document' ? '' : title %>">
+                    <input type="text" class="form-control" id="title" name="title" placeholder="Title" value="<%= document.title === 'New document' ? '' : document.title %>">
                 </div>
                 <div class="form-group">
                     <label for="content">Content</label>
-                    <textarea class="form-control js-content" name="content"><%= markdown %></textarea>
+                    <textarea class="form-control js-content" name="content"><%= document.markdown %></textarea>
                 </div>
                 <div class="form-group">
                     <label for="title">Tags</label>
-                    <input type="text" class="form-control" id="tags" name="tags" placeholder="Tags..." value="<%= tags ? tags.join() : '' %>">
+                    <input type="text" class="form-control" id="tags" name="tags" placeholder="Tags..." value="<%= document.tags ? document.tags.join() : '' %>">
                 </div>
-                <a href="/<%= slug %>" class="btn btn-primary">Close</a>
-                <input type="hidden" id="originalSlug" name="originalSlug" value="<%= slug %>" />
+                <a href="/<%= document.slug %>" class="btn btn-primary">Close</a>
+                <input type="hidden" id="originalSlug" name="originalSlug" value="<%= document.slug %>" />
                 <input type="submit" class="btn btn-success" value="Save"/>
                 
-                <% if(slug){ %>
-                <a href="/<%= slug %>/delete" class="btn btn-danger pull-right js-delete">Delete</a>
+                <% if(document.slug){ %>
+                <a href="/<%= document.slug %>/delete" class="btn btn-danger pull-right js-delete">Delete</a>
                 <% } %>
            </form>
         </div>

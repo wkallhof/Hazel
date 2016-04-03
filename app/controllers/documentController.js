@@ -3,11 +3,13 @@
 const marked = require("marked");
 const Document = require("../models/document");
 const DetailViewModel = require("../models/detailViewModel");
+const EditViewModel = require("../models/editViewModel");
 const _ = require("lodash");
 
 class DocumentController {
-    constructor(server, authMethod, documentRepository, analyticsService, storageProvider, searchProvider, parserUtility) {
+    constructor(server, config, authMethod, documentRepository, analyticsService, storageProvider, searchProvider, parserUtility) {
         this._server = server;
+        this._config = config;
         this._auth = authMethod;
         this._documents = documentRepository;
         this._analyticsService = analyticsService;
@@ -49,8 +51,9 @@ class DocumentController {
 
         viewModel.document = document;
         viewModel.title = document.title;
-        viewModel.relatedDocuments = this.fetchRelatedDocuments(viewModel.title, 5);
-        viewModel.recentDocuments = this.fetchRecentDocuments(5);
+        viewModel.relatedDocuments = this._fetchRelatedDocuments(viewModel.title, 5);
+        viewModel.recentDocuments = this._fetchRecentDocuments(5);
+        viewModel.config = this._config;
         // render content
         res.render("document", viewModel);
     }
@@ -72,7 +75,12 @@ class DocumentController {
             document.title = this._storageProvider.slugToTitle(slug);
         }
 
-        res.render("edit", document);
+        let viewModel = new EditViewModel();
+        viewModel.title = document.title;
+        viewModel.document = document;
+        viewModel.config = this._config;
+
+        res.render("edit", viewModel);
     }
 
     /**
@@ -146,13 +154,18 @@ class DocumentController {
         document.slug = "";
         document.title = "New document";
 
-        res.render("edit", document);
+        let viewModel = new EditViewModel();
+        viewModel.document = document;
+        viewModel.title = document.title;
+        viewModel.config = this._config;
+
+        res.render("edit", viewModel);
     }
 
     /**
      * Fetch the most recent documents
      */
-    fetchRecentDocuments(count) {
+    _fetchRecentDocuments(count) {
         let documents = this._documents.all();
 
         return _.chain(documents)
@@ -166,7 +179,7 @@ class DocumentController {
     /**
      * Fetch the related documents
      */
-    fetchRelatedDocuments(title, count) {
+    _fetchRelatedDocuments(title, count) {
         return _.chain(this._searchProvider.internalSearch(title))
             .reject({ "title": title })
             .take(count)

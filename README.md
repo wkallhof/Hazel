@@ -9,9 +9,9 @@
   [![Test Coverage][coveralls-image]][coveralls-url]
 
 ```js
-const Hazel = require("hazel-wiki").app;
-const config = require("./config.default.js");
-const StorageProvider = require("hazel-wiki").storageProvider;
+const Hazel             = require("hazel-wiki").app;
+const config            = require("./config.default.js");
+const StorageProvider   = require("hazel-wiki").storageProvider;
 
 let app = new Hazel(config, StorageProvider);
 let server = app.server;

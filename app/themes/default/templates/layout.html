@@ -1,9 +1,15 @@
+<!-- View Object 
+{
+    config = [config] Global config
+}
+-->
+
 <!DOCTYPE html>
 <html class="no-js" lang="en-US">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title><%= title ? title+" | " : ""%> Hazel Wiki</title>
+        <title><%= title ? title+" | " : ""%> <%= config.site_title %></title>
         <link rel="stylesheet" href="/styles/tidy.css" type='text/css' media='all' />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Muli%3A400%2C300&#038;subset=latin&#038;ver=4.4.2' type='text/css' media='all' />
@@ -21,7 +27,7 @@
                 <!-- LOGO -->
                 <div class="navbar-header">
                     <a class="navbar-brand" href="/">
-                        <h2>HAZEL</h2>
+                        <h2><%= config.site_title %></h2>
                     </a>
                     <form role="search" method="get" id="searchform" class="form-search navbar-form" action="/search">
                         <i class="fa fa-search"></i>

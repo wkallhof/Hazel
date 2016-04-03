@@ -9,6 +9,7 @@ class DetailViewModel {
         this.title = "";
         this.relatedDocuments = [];
         this.recentDocuments = [];
+        this.config = {};
     }
 }
 

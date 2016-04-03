@@ -2,8 +2,8 @@
 
 var config = {
 
-    // Your site title (format: page_title - site_title)
-    site_title: "Hazel Wiki",
+    // Your site title (format: page_title | site_title)
+    site_title: "HAZEL",
 
     // Excerpt length (used in search)
     excerpt_length: 400,
