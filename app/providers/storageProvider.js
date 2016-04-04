@@ -17,14 +17,14 @@ class StorageProvider {
         this._config = config;
         this._parser = parserUtility;
 
-        this.createDirectories();
+        this._createDirectories();
     }
 
     /**
      * Handles creating directories
      * for storing data and content
      */
-    createDirectories() {
+    _createDirectories() {
         try {
             fs.mkdirSync(this._config.content_dir);
             fs.mkdirSync(this._config.data_dir);

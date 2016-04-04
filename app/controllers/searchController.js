@@ -9,10 +9,10 @@ class SearchController {
         this._auth = authMethod;
         this._searchProvider = searchProvider;
 
-        this.bindRoutes();
+        this._bindRoutes();
     }
 
-    bindRoutes() {
+    _bindRoutes() {
         // /search
         this._server.get("/search", this._auth, this.index.bind(this));
     }

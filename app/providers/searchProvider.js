@@ -15,13 +15,13 @@ class SearchProvider {
         this._searchTerms = {};
         this._index = null;
 
-        this.setup();
+        this._setup();
     }
 
     /**
      * Setup the initial search index.
      */
-    setup() {
+    _setup() {
         this._index = lunr(function() {
             this.field("title", { boost: 10 });
             this.field("markdown");

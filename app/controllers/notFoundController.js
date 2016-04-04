@@ -13,10 +13,10 @@ class NotFoundController {
         this._auth = authMethod;
         this._storageProvider = storageProvider;
 
-        this.bindRoutes();
+        this._bindRoutes();
     }
 
-    bindRoutes() {
+    _bindRoutes() {
         // /[slug]
         this._server.get("/:slug", this._auth, this.index.bind(this));
     }

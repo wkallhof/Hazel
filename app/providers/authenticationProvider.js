@@ -24,7 +24,7 @@ class AuthenticationProvider {
         if (!user || !user.name || !user.pass ||
             user.name !== this._config.credentials.username ||
             user.pass !== this._config.credentials.password) {
-            return this.unauthorized(req, res, next);
+            return this._unauthorized(req, res, next);
         }
 
         // we are good, move on
@@ -35,7 +35,7 @@ class AuthenticationProvider {
      * Handles the response for when the current user
      * is not authorized
      */
-    unauthorized(req, res, next) {
+    _unauthorized(req, res, next) {
         res.statusCode = 401;
         res.setHeader("WWW-Authenticate", "Basic realm=Authorization Required");
         res.end("Access denied");

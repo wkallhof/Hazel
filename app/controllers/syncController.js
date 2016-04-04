@@ -13,10 +13,10 @@ class SyncController {
         this._documents = documentRepository;
         this._searchProvider = searchProvider;
 
-        this.bindRoutes();
+        this._bindRoutes();
     }
 
-    bindRoutes() {
+    _bindRoutes() {
         // /sync
         this._server.get("/sync", this._auth, this.index.bind(this));
 
@@ -53,7 +53,7 @@ class SyncController {
         if (!req.params.key) { next(); return; }
         if (!req.params.slug) { next(); return; }
 
-        if (!this.validateKey(res, req.params.key)) return;
+        if (!this._validateKey(res, req.params.key)) return;
 
         let doc = _.find(this._documents.all(), { "slug": req.params.slug });
 
@@ -69,7 +69,7 @@ class SyncController {
     returnList(req, res, next) {
         if (!req.params.key) { next(); return; }
 
-        if (!this.validateKey(res, req.params.key)) return;
+        if (!this._validateKey(res, req.params.key)) return;
 
         let documentSlugs = _.map(this._documents.all(), (doc) => doc.slug);
 
@@ -87,7 +87,7 @@ class SyncController {
         if (!req.params.server) { next(); return; }
         if (!req.params.slug) { next(); return; }
 
-        if (!this.validateKey(res, req.params.key)) return;
+        if (!this._validateKey(res, req.params.key)) return;
 
         // decode base64 encoded server
         let server = base64.decode(req.params.server);
@@ -112,7 +112,7 @@ class SyncController {
         if (!req.params.key) { next(); return; }
         if (!req.params.server) { next(); return; }
 
-        if (!this.validateKey(res, req.params.key)) return;
+        if (!this._validateKey(res, req.params.key)) return;
 
         // decode base64 encoded server
         let server = base64.decode(req.params.server);
@@ -136,7 +136,7 @@ class SyncController {
     write(req, res, next) {
         if (!req.params.key) { next(); return; }
 
-        if (!this.validateKey(res, req.params.key)) return;
+        if (!this._validateKey(res, req.params.key)) return;
         if (!req.body) { res.json({ message: "Invalid document provided" }); return; }
 
         let newDoc = req.body;
@@ -168,7 +168,7 @@ class SyncController {
     /**
      * Validates the provided key
      */
-    validateKey(res, key) {
+    _validateKey(res, key) {
         if (key === this._config.sync_key) return true;
 
         res.json({ message: "Invalid Sync Key" });

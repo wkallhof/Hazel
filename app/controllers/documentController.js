@@ -17,10 +17,10 @@ class DocumentController {
         this._searchProvider = searchProvider;
         this._parserUtility = parserUtility;
 
-        this.bindRoutes();
+        this._bindRoutes();
     }
 
-    bindRoutes() {
+    _bindRoutes() {
          // /[slug]/edit
         this._server.get("/:slug/edit", this._auth, this.edit.bind(this));
         // /[slug]/delete

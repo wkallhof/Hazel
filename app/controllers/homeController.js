@@ -12,10 +12,10 @@ class HomeController {
         this._searchProvider = searchProvider;
         this._analyticsService = analyticsService;
 
-        this.bindRoutes();
+        this._bindRoutes();
     }
 
-    bindRoutes() {
+    _bindRoutes() {
         // /
         this._server.get("/", this._auth, this.index.bind(this));
     }
