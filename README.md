@@ -1,6 +1,6 @@
-# Hazel
+[![Hazel Logo](logo.jpg)](http://hazel.wmk.io/)
 
-  Fast, simple, markdown powered wiki knowledge base for [node](http://nodejs.org).
+<div stlye="display:none">Fast, simple, markdown powered wiki knowledge base for NodeJs</div>
 
   [![NPM Version][npm-image]][npm-url]
   [![NPM Downloads][downloads-image]][downloads-url]
