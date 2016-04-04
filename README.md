@@ -16,6 +16,8 @@ let server = app.server;
 
 server.listen(3000)
 ```
+## Demo
+ Use the full featured online demo : [http://hazel-demo.wmk.io](http://hazel-demo.wmk.io)
 
 ## Installation
 
