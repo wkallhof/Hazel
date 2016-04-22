@@ -6,24 +6,27 @@
   [![Windows Build][appveyor-image]][appveyor-url]
   [![Test Coverage][coveralls-image]][coveralls-url]
 
+## Installation
+
+```bash
+$ npm install hazel-wiki
+```
+
+## Setup
 ```js
-const Hazel             = require("hazel-wiki").app;
-const config            = require("./config.default.js");
-const StorageProvider   = require("hazel-wiki").storageProvider;
+const Hazel = require("hazel-wiki").app;
+const config = require("./config.default.js");
+const StorageProvider = require("hazel-wiki").storageProvider;
 
 let app = new Hazel(config, StorageProvider);
 let server = app.server;
 
 server.listen(3000)
 ```
+For a more in-depth tutorial, check out [Getting Started with Hazel](http://wmk.io/posts/hazel-get-started)
+
 ## Demo
  Use the full featured online demo : [http://hazel-demo.wmk.io](http://hazel-demo.wmk.io)
-
-## Installation
-
-```bash
-$ npm install hazel-wiki
-```
 
 ## Features
 
