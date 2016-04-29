@@ -22,6 +22,7 @@ var config = {
 
     // Set to true to enable HTTP Basic Authentication
     authentication: false,
+    authentication_mode: "admin",
     credentials: {
         username: "",
         password: ""

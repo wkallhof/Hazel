@@ -17,6 +17,16 @@ class AuthenticationProvider {
             return next();
         }
 
+        // if authmode restricts only admin routes
+        if (this._config.authentication_mode === "admin")
+        {
+            // if we are navigating not to an admin route then skip authcheck
+            var action = req.url.substr(req.url.lastIndexOf('/')+1);
+            if ( ['new', 'save', 'edit', 'delete'].indexOf(action) === -1) {
+                return next();   
+            }
+        }
+
         // if so, use basic auth
         let user = basic_auth(req);
 
