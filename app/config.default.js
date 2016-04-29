@@ -21,6 +21,9 @@ var config = {
     // Path to the static file directory for themes
     public_dir: __dirname + "/themes/default/public/",
 
+    // Optional Lunr locale
+    lunr_locale: "",
+
     // Secret key used to sync two servers
     sync_key: "",
 

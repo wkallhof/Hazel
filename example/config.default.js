@@ -17,6 +17,9 @@ var config = {
     // Secret key used to sync two servers
     sync_key: "",
 
+    // Optional Lunr locale
+    lunr_locale: "",
+
     // Set to true to enable HTTP Basic Authentication
     authentication: false,
     credentials: {
