@@ -3,6 +3,9 @@
   "version": "1.0.6",
   "description": "Fast, simple, Markdown powered wiki knowledge base",
   "author": "Wade Kallhoff <w@wmk.io>",
+  "contributors": [
+    "Egor Kuryanovich <me@sontan.name> (http://sontan.name)"
+  ],
   "license": "GPL-3.0",
   "repository": "wkallhof/hazel",
   "homepage": "https://github.com/wkallhof/Hazel",

@@ -19,8 +19,8 @@ class SearchProvider {
 
         // If we need an additional locale support
         if (this._config.lunr_locale) {
-            require('lunr-languages/lunr.stemmer.support.js')(lunr);
-            require('lunr-languages/lunr.'+this._config.lunr_locale+'.js')(lunr);
+            require("lunr-languages/lunr.stemmer.support.js")(lunr);
+            require("lunr-languages/lunr." + this._config.lunr_locale + ".js")(lunr);
         }
 
         this._setup(this._config);
@@ -31,8 +31,7 @@ class SearchProvider {
      */
     _setup(config) {
         this._index = lunr(function() {
-
-            // Activating out locale support
+            // Activating out locale supports
             if (config.lunr_locale) {
                 this.use(lunr[config.lunr_locale]);
             }
