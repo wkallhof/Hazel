@@ -35,7 +35,7 @@ class Hazel {
         this._documentParserUtility = new DocumentParserUtility();
         this._storageProvider       = new StorageProvider(this._config, this._documentParserUtility);
         this._documentRepository    = new DocumentRepository(this._storageProvider);
-        this._searchProvider        = new SearchProvider(this._documentRepository);
+        this._searchProvider        = new SearchProvider(this._documentRepository, this._config);
         this._analyticsService      = new AnalyticsService(this._storageProvider);
 
         this.setupServer();

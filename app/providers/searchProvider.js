@@ -3,26 +3,40 @@
 const _ = require("lodash");
 const lunr = require("lunr");
 const marked = require("marked");
+
 /**
  * Search Provider that provides searching capabilities
  * for the documents in the system
  */
 class SearchProvider {
 
-    constructor(documentRepository) {
+    constructor(documentRepository, config) {
         this._documents = documentRepository;
+        this._config = config;
         this._excerptLength = 300;
         this._searchTerms = {};
         this._index = null;
 
-        this._setup();
+        // If we need an additional locale support
+        if (this._config.lunr_locale) {
+            require('lunr-languages/lunr.stemmer.support.js')(lunr);
+            require('lunr-languages/lunr.'+this._config.lunr_locale+'.js')(lunr);
+        }
+
+        this._setup(this._config);
     }
 
     /**
      * Setup the initial search index.
      */
-    _setup() {
+    _setup(config) {
         this._index = lunr(function() {
+
+            // Activating out locale support
+            if (config.lunr_locale) {
+                this.use(lunr[config.lunr_locale]);
+            }
+
             this.field("title", { boost: 10 });
             this.field("markdown");
             this.field("tags", 100);
