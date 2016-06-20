@@ -8,6 +8,9 @@ var config = {
     // Excerpt length (used in search)
     excerpt_length: 400,
 
+    //Application base url
+    base: '/',
+
     // Path in which to store content (markdown files, etc.)
     content_dir: __dirname + "/content/",
 

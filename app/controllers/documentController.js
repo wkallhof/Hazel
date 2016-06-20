@@ -125,7 +125,7 @@ class DocumentController {
             this._searchProvider.indexRemove({ slug: originalSlug});
         }
 
-        res.redirect("/" + slug);
+        res.redirect(this._config.base + slug);
     }
 
     /**
@@ -144,7 +144,7 @@ class DocumentController {
             this._searchProvider.indexRemove({ slug: slug});
         } else { next(); return; }
 
-        res.redirect("/");
+        res.redirect(this._config.base);
     }
 
      /**

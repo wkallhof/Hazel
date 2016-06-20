@@ -8,6 +8,9 @@ var config = {
     // Excerpt length (used in search)
     excerpt_length: 400,
 
+    //Application base url
+    base: "/",
+
     // Specify the theme to use
     theme_dir: __dirname + "/themes/",
     theme_name: "default",

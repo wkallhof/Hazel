@@ -19,9 +19,9 @@
     <div id="content" class="content">
         <div class="row bg">
             <main class="main col-sm-12" role="main">
-                <div class="alert alert-warning">Sorry, but the document you were trying to view does not exist yet. Would you like to <a href="/<%= slug %>/edit">create it?</a></div>
+                <div class="alert alert-warning">Sorry, but the document you were trying to view does not exist yet. Would you like to <a href="<%= slug %>/edit">create it?</a></div>
 
-                <form role="search" class="form" method="get" id="searchform" action="/search">
+                <form role="search" class="form" method="get" id="searchform" action="search">
                     <div class="input-group">
                         <label class="sr-only" for="s">Search for:</label>
                         <input type="search" value="" name="s" id="s" class="form-control" placeholder="Search documents...">

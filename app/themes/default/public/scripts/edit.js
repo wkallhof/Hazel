@@ -30,7 +30,7 @@ EditPage.prototype = {
         var myDropzone = new Dropzone("form#myAwesomeDropzone");
         myDropzone.on("success", function(file, responseText) {
             console.log(responseText); // console should show the ID you pointed to
-            simplemde.value(simplemde.value()+ "\n![](/uploads/"+responseText+")\n");
+            simplemde.value(simplemde.value()+ "\n![](uploads/"+responseText+")\n");
             // do stuff with file.id ...
         });
 
@@ -46,7 +46,7 @@ EditPage.prototype = {
      */
     onTitleInputChange: function(event) {
         var slug = this.titleToSlug(this.$titleInput.val());
-        this.$form.prop("action", "/" + slug + "/save");
+        this.$form.prop("action", slug + "/save");
     },
 
     /**

@@ -4,7 +4,7 @@
 Lorem markdownum misit. Et vituli protinus laevo brevior, pronaque et Triones
 [capuloque huic pro](http://www.youtube.com/watch?v=MghiBW3r65M).
 
-> [Pares currebam o videre](/pares-currebam-o-videre), bracchia inane, ait radice vultus [cum
+> [Pares currebam o videre](pares-currebam-o-videre), bracchia inane, ait radice vultus [cum
 > adhuc](http://seenly.com/) mactatos meos est vera aestu memores fecerat
 > narrat? Myricae alias poenam, onerosa dissipat, optato viros visa. Omnes
 > dedit, et super. Huic **meriti et** et et mater cunctis, tactis, iunxit,
