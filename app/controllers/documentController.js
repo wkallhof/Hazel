@@ -4,6 +4,7 @@ const marked = require("marked");
 const Document = require("../models/document");
 const DetailViewModel = require("../models/detailViewModel");
 const EditViewModel = require("../models/editViewModel");
+const multer = require("multer");
 const _ = require("lodash");
 
 class DocumentController {
@@ -31,6 +32,8 @@ class DocumentController {
         this._server.get("/new", this._auth, this.new.bind(this));
         // /[slug]
         this._server.get("/:slug", this._auth, this.detail.bind(this));
+        // /upload
+        this._server.post("/upload", this._auth, this.upload.bind(this));
     }
 
     /**
@@ -160,6 +163,39 @@ class DocumentController {
         viewModel.config = this._config;
 
         res.render("edit", viewModel);
+    }
+
+    /**
+     * POST : Image uploading handler
+     */
+    upload(req, res, next) {
+
+        var upload_path = this._config.uploads_dir;
+        var filename = "";
+        var storage = multer.diskStorage({
+            destination: function (req, file, cb) {
+                cb(null, upload_path);
+            },
+            filename: function (req, file, cb) {
+                filename = file.originalname.substr(0, file.originalname.lastIndexOf('.')) + '-' + Date.now() + file.originalname.substr(file.originalname.lastIndexOf('.'));
+                cb(null, filename);
+            }
+        });
+         
+        var uploadimage = multer({ storage: storage }).single("file");
+
+        uploadimage(req, res, function(err) {
+            if(err) {
+                return res.status(422).send(err);
+            }
+            
+            if ( !req.file.mimetype.startsWith( 'image/' ) ) {
+                return res.status( 422 ).json( {
+                    error : 'The uploaded file must be an image'
+                } );
+            }
+            return res.status( 200 ).send( filename );
+        });
     }
 
     /**

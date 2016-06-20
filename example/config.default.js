@@ -11,6 +11,9 @@ var config = {
     // Path in which to store content (markdown files, etc.)
     content_dir: __dirname + "/content/",
 
+    // Path in which to store uploads (images etc.)
+    uploads_dir: __dirname + "/uploads/",
+
     // Path in which to store data (analytics, etc.)
     data_dir: __dirname + "/data/",
 

@@ -79,6 +79,7 @@ class Hazel {
         // Setup Express
         this._server.use(favicon(this._config.public_dir + "/favicon.ico"));
         this._server.use(express.static(this._config.public_dir));
+        this._server.use('/uploads', express.static(this._config.uploads_dir));
         this._server.use(bodyParser.urlencoded({ extended: false }));
     }
 }

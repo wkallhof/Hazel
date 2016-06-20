@@ -928,6 +928,10 @@ aside .widget h3 {
   margin-bottom: 1.6em;
 }
 
+.content img {
+  max-width: 100%;
+}
+
 .content .btn:hover i {
   color: #fff !important;
 }

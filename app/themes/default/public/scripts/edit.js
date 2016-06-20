@@ -25,6 +25,17 @@ EditPage.prototype = {
         // autosize(this.$markdownInput);
 
         var simplemde = new SimpleMDE();
+
+
+        var myDropzone = new Dropzone("form#myAwesomeDropzone");
+        myDropzone.on("success", function(file, responseText) {
+            console.log(responseText); // console should show the ID you pointed to
+            simplemde.value(simplemde.value()+ "\n![](/uploads/"+responseText+")\n");
+            // do stuff with file.id ...
+        });
+
+        $("form#myAwesomeDropzone").addClass('dropzone');
+        
         this.$titleInput.on("input propertychange paste", this.onTitleInputChange.bind(this));
         this.$deleteButton.on("click", this.onDeleteClick.bind(this));
     },
