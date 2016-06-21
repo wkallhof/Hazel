@@ -20,7 +20,7 @@
                     
                     <h3 class="widget-title">Document Search</h3>
                     <div class="live-search">
-                        <form role="search" method="get" id="searchform" class="form-search" action="/search">
+                        <form role="search" method="get" id="searchform" class="form-search" action="search">
                             <div class="input-group">
                                 <input type="text" id="autocomplete-ajax" name="s" id="s" class="searchajax search-query form-control" autocomplete="off" placeholder="Search for documents here...">
                                 <span class="input-group-btn">
@@ -35,7 +35,7 @@
                     <% if(popularSearches && popularSearches.length > 0){ %>
                         <p class="top-searches">Popular searches:
                         <% for(var i = 0; i < popularSearches.length; i++){ var search = popularSearches[i]; %>
-                            <a href="/search?s=<%= encodeURIComponent(search) %>"><%= search + ((i != popularSearches.length -1) ?"," :"") %></a>
+                            <a href="search?s=<%= encodeURIComponent(search) %>"><%= search + ((i != popularSearches.length -1) ?"," :"") %></a>
                         <% } %>
                         </p>
                     <% } %>
@@ -51,6 +51,26 @@
         <div class="row bg">
             <main class="main col-sm-12"  role="main">
                 <div class="row knowledge-base-row">
+                   
+                    <% for(var i = 0; i < config.site_sections.length; i++){ var section = config.site_sections[i];%>
+                    <!-- SECTION -->
+                    <a class="col-sm-4 kb-section" href="~<%= section.tag %>">
+                        <h2>
+                            <%= section.title %>
+                        </h2>
+                        <span class="description"><%= section.description %><span>
+                        <span class="link"><%= taggedDocuments[section.tag].length %> documents</span>
+                    </a>
+                    <% } %>
+
+                </div>
+            </main>
+            <!-- /.main -->
+            <div class="clearfix"></div>
+        </div>
+        <div class="row bg">
+            <main class="main col-sm-12"  role="main">
+                <div class="row knowledge-base-row">
                     
                     <!-- RECENT DOCUMENTS -->
                     <div class="col-sm-4 kb-category">
@@ -61,7 +81,7 @@
                         <ul class="category-posts">
                             <% for(var i = 0; i < recentDocuments.length; i++){ var document = recentDocuments[i];%>
                                 <li class="list-post pa-post-format">
-                                    <i class="fa fa-file-text fa-fw"></i> <a href="/<%= document.slug %>"><%= document.title %></a>
+                                    <i class="fa fa-file-text fa-fw"></i> <a href="<%= document.slug %>"><%= document.title %></a>
                                 </li>
                             <% } %>
                         </ul>
@@ -76,7 +96,7 @@
                         <% if(popularDocuments && popularDocuments.length > 0){ %>
                         <ul class="category-posts">
                             <% for(var i = 0; i < popularDocuments.length; i++){ var document = popularDocuments[i];%>
-                                <li class="list-post pa-post-format"><i class="fa fa-file-text"></i> <a href="/<%= document.slug %>"><%= document.title %></a></li>
+                                <li class="list-post pa-post-format"><i class="fa fa-file-text"></i> <a href="<%= document.slug %>"><%= document.title %></a></li>
                             <% } %>
                         </ul>
                         <% } %>
@@ -90,7 +110,7 @@
                         <% if(randomDocuments && randomDocuments.length > 0){ %>
                         <ul class="category-posts">
                             <% for(var i = 0; i < randomDocuments.length; i++){ var document = randomDocuments[i];%>
-                                <li class="list-post pa-post-format"><i class="fa fa-file-text"></i> <a href="/<%= document.slug %>"><%= document.title %></a></li>
+                                <li class="list-post pa-post-format"><i class="fa fa-file-text"></i> <a href="<%= document.slug %>"><%= document.title %></a></li>
                             <% } %>
                         </ul>
                         <% } %>

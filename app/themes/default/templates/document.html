@@ -8,7 +8,7 @@
 }
 -->
 
-<link rel="stylesheet" href="/vendor/highlight/highlight.css" type='text/css' media='all' />
+<link rel="stylesheet" href="vendor/highlight/highlight.css" type='text/css' media='all' />
 
 <!-- HEADER -->
 <div class="before-main-wrapper">
@@ -16,7 +16,7 @@
         <div class="container header-left">
             <div class="header-titles">
                 <h1 class="page-title"><%= document.title %></h1>
-                <a class="btn btn-primary pull-right" href="/<%= document.slug %>/edit"><i class="fa fa-pencil"></i> Edit</a>
+                <a class="btn btn-primary pull-right" href="<%= document.slug %>/edit"><i class="fa fa-pencil"></i> Edit</a>
             </div>
         </div>
     </div>
@@ -45,7 +45,7 @@
                     <ul>
                         <% for(var i = 0; i < relatedDocuments.length ; i++){ var relatedDocument = relatedDocuments[i]; %>
                         <li class="list-post pa-post-format">
-                            <i class="fa fa-file-text fa-fw"></i> <a href="/<%= relatedDocument.slug %>"><%= relatedDocument.title %></a>
+                            <i class="fa fa-file-text fa-fw"></i> <a href="<%= relatedDocument.slug %>"><%= relatedDocument.title %></a>
                         </li>
                         <% } %>
                     </ul>
@@ -59,7 +59,7 @@
                     <ul>
                         <% for(var i = 0; i < recentDocuments.length ; i++){ var recentDocument = recentDocuments[i]; %>
                         <li class="list-post pa-post-format">
-                            <i class="fa fa-file-text fa-fw"></i> <a href="/<%= recentDocument.slug %>"><%= recentDocument.title %></a>
+                            <i class="fa fa-file-text fa-fw"></i> <a href="<%= recentDocument.slug %>"><%= recentDocument.title %></a>
                         </li>
                         <% } %>
                     </ul>

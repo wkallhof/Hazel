@@ -1,4 +1,4 @@
-<!--META {"title":"Crimen ima parva faxo potuit","tags":["ima","parva","faxo","potuit"],"createDate":1459643061384,"updateDate":1459643061384} -->
+<!--META {"title":"Crimen ima parva faxo potuit","tags":["ima","parva","faxo","potuit","manual"],"createDate":1459643061384,"updateDate":1459643061384} -->
 ## Novam quae sustulit in moriens simul frusta
 
 Lorem markdownum monitis movit; tum quoque, deus desint idem fecit mare:

@@ -1,8 +1,8 @@
-<!--META {"title":"Nube exigua vires","tags":["Leves","arcus","non"],"createDate":null,"updateDate":1459643317356} -->
+<!--META {"title":"Nube exigua vires","tags":["Leves","arcus","non","faq"],"createDate":null,"updateDate":1466433514772} -->
 ## Iactas milia tamen
 
 Lorem markdownum sed. Famulas onus eat lammina Maeonia vidi, *retinentibus qua*
-aristas cognitius et mihi! [Aello quae racemifero omnia](/aello-quae-racemifero-omnia).
+aristas cognitius et mihi! [Aello quae racemifero omnia](aello-quae-racemifero-omnia).
 
     if (quad) {
         igp *= surfaceBps(desktop_operating_cpu, -2, overwritePasteShift +

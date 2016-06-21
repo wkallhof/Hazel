@@ -30,6 +30,11 @@ class HomeController {
         viewModel.recentDocuments = this._fetchRecentDocuments(5);
         viewModel.randomDocuments = this._fetchRandomDocuments(5);
         viewModel.popularDocuments = this._fetchPopularDocuments(5);
+
+        this._config.site_sections.forEach(function(section) {
+            viewModel.taggedDocuments[section.tag] = this._fetchTaggedDocuments(5, section.tag);
+        }, this);
+
         viewModel.config = this._config;
 
         res.render("home", viewModel);
@@ -43,6 +48,20 @@ class HomeController {
 
         return _.chain(documents)
             .reject({"updateDate": null})
+            .sortBy("updateDate")
+            .reverse()
+            .take(count)
+            .value();
+    }
+
+    /**
+     * Fetch the tagged documents
+     */
+    _fetchTaggedDocuments(count, tag) {
+        let documents = this._documents.all();
+
+        return _.chain(documents)
+            .filter( function(doc) { return doc.tags.indexOf(tag) != -1; })
             .sortBy("updateDate")
             .reverse()
             .take(count)

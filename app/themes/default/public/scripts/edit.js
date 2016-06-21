@@ -25,6 +25,17 @@ EditPage.prototype = {
         // autosize(this.$markdownInput);
 
         var simplemde = new SimpleMDE();
+
+
+        var myDropzone = new Dropzone("form#myAwesomeDropzone");
+        myDropzone.on("success", function(file, responseText) {
+            console.log(responseText); // console should show the ID you pointed to
+            simplemde.value(simplemde.value()+ "\n![](uploads/"+responseText+")\n");
+            // do stuff with file.id ...
+        });
+
+        $("form#myAwesomeDropzone").addClass('dropzone');
+        
         this.$titleInput.on("input propertychange paste", this.onTitleInputChange.bind(this));
         this.$deleteButton.on("click", this.onDeleteClick.bind(this));
     },
@@ -35,7 +46,7 @@ EditPage.prototype = {
      */
     onTitleInputChange: function(event) {
         var slug = this.titleToSlug(this.$titleInput.val());
-        this.$form.prop("action", "/" + slug + "/save");
+        this.$form.prop("action", slug + "/save");
     },
 
     /**
@@ -53,12 +64,7 @@ EditPage.prototype = {
      * @prop title [string] - title to conver to slug
      */
     titleToSlug: function(title) {
-        return title.toString().toLowerCase()
-            .replace(/\s+/g, "-")           // Replace spaces with -
-            .replace(/[^\w\-]+/g, "")       // Remove all non-word chars
-            .replace(/\-\-+/g, "-")         // Replace multiple - with single -
-            .replace(/^-+/, "")             // Trim - from start of text
-            .replace(/-+$/, "");            // Trim - from end of text
+        return url_slug(title, {limit: 100});
     }
 };
 
