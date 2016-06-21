@@ -1,5 +1,7 @@
-<!--META {"title":"Aello quae racemifero omnia","tags":["quae","racemifero","omnia"],"createDate":null,"updateDate":1459643364878} -->
+<!--META {"title":"Aello quae racemifero omnia","tags":["quae","racemifero","omnia","manual","faq","team"],"createDate":null,"updateDate":1466502145950} -->
 ## Neque colores facundia figuram incipiat annos
+
+![](uploads/любимки-наши-1466502131913.png)
 
 Lorem markdownum misit. Et vituli protinus laevo brevior, pronaque et Triones
 [capuloque huic pro](http://www.youtube.com/watch?v=MghiBW3r65M).

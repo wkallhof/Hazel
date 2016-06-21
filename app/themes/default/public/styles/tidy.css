@@ -200,6 +200,7 @@ h3 {
 h4 {
   margin-top: 10px;
   margin-bottom: 10px;
+  padding-bottom: 20px;
 }
 
 h1 {
@@ -1233,3 +1234,37 @@ h1.page-title {
   font-weight: 400;
   src: local('Muli'), url(http://fonts.gstatic.com/s/muli/v7/BfQP1MR3mJNaumtWa4Tizg.ttf) format('truetype');
 }
+
+
+.kb-section {
+  text-align: center;
+  display: inline-block;
+  width: 30%;
+  border: 1px solid #e0e0e0;
+  margin: 0 1% 20px;
+  padding: 1.5em 1em;
+  cursor: pointer;
+  -webkit-transition: background .15s;
+  -moz-transition: background .15s;
+  -o-transition: background .15s;
+  transition: background .15s;
+  vertical-align: top;
+}
+
+.kb-section .description {
+  font-size: 14px;
+  line-height: 20px;
+  padding-left: 20%;
+  padding-right: 20%;
+
+  display: block;
+}
+
+.kb-section .link {
+  font-size: 14px;
+  text-decoration: underline;
+  padding-top: 20px;
+
+  display: block;
+}
+

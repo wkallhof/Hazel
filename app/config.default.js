@@ -5,6 +5,24 @@ var config = {
     // Your site title (format: page_title | site_title)
     site_title: "HAZEL",
 
+    // Your site sections for homepage
+    site_sections: [{
+            'title': 'Tenuatus',
+            'description': 'In tellus solent, me caelum ripis, ducere licebit fovebat.',
+            'tag': 'manual'
+        },
+        {
+            'title': 'Canentem',
+            'description': 'Quis admoverat ferunt nusquam potiere, virtute.',
+            'tag': 'team'
+        },
+        {
+            'title': 'Timor',
+            'description': 'Ore divite ingemuit ingredior, rediturum!',
+            'tag': 'faq'
+        }
+    ],
+
     // Excerpt length (used in search)
     excerpt_length: 400,
 

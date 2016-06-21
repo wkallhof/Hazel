@@ -51,6 +51,26 @@
         <div class="row bg">
             <main class="main col-sm-12"  role="main">
                 <div class="row knowledge-base-row">
+                   
+                    <% for(var i = 0; i < config.site_sections.length; i++){ var section = config.site_sections[i];%>
+                    <!-- SECTION -->
+                    <a class="col-sm-4 kb-section" href="~<%= section.tag %>">
+                        <h2>
+                            <%= section.title %>
+                        </h2>
+                        <span class="description"><%= section.description %><span>
+                        <span class="link"><%= taggedDocuments[section.tag].length %> documents</span>
+                    </a>
+                    <% } %>
+
+                </div>
+            </main>
+            <!-- /.main -->
+            <div class="clearfix"></div>
+        </div>
+        <div class="row bg">
+            <main class="main col-sm-12"  role="main">
+                <div class="row knowledge-base-row">
                     
                     <!-- RECENT DOCUMENTS -->
                     <div class="col-sm-4 kb-category">
