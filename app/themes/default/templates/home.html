@@ -48,18 +48,18 @@
 <!-- MAIN CONTENT -->
 <div class="container wrap main-section" id="wrap-main-section">
     <div id="content" class="content">
+        <% if(siteSections && siteSections.length > 0) { %>
         <div class="row bg">
             <main class="main col-sm-12"  role="main">
                 <div class="row knowledge-base-row">
-                   
-                    <% for(var i = 0; i < config.site_sections.length; i++){ var section = config.site_sections[i];%>
+                    <% for(var i = 0; i < siteSections.length; i++){ var section = siteSections[i];%>
                     <!-- SECTION -->
                     <a class="col-sm-4 kb-section" href="~<%= section.tag %>">
                         <h2>
                             <%= section.title %>
                         </h2>
                         <span class="description"><%= section.description %><span>
-                        <span class="link"><%= taggedDocuments[section.tag].length %> documents</span>
+                        <span class="link"><%= section.documentCount %> documents</span>
                     </a>
                     <% } %>
 
@@ -68,6 +68,7 @@
             <!-- /.main -->
             <div class="clearfix"></div>
         </div>
+        <% } %>
         <div class="row bg">
             <main class="main col-sm-12"  role="main">
                 <div class="row knowledge-base-row">

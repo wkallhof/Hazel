@@ -1,6 +1,8 @@
 "use strict";
 
 const HomeViewModel = require("../models/homeViewModel");
+const SiteSectionViewModel = require("../models/siteSectionViewModel");
+
 const _ = require("lodash");
 
 class HomeController {
@@ -30,10 +32,7 @@ class HomeController {
         viewModel.recentDocuments = this._fetchRecentDocuments(5);
         viewModel.randomDocuments = this._fetchRandomDocuments(5);
         viewModel.popularDocuments = this._fetchPopularDocuments(5);
-
-        this._config.site_sections.forEach(function(section) {
-            viewModel.taggedDocuments[section.tag] = this._fetchTaggedDocuments(5, section.tag);
-        }, this);
+        viewModel.siteSections = this._fetchSiteSections();
 
         viewModel.config = this._config;
 
@@ -53,19 +52,28 @@ class HomeController {
             .take(count)
             .value();
     }
+ 
+    /**
+     * Fetch the site sections as they are defined in the config
+     */
+    _fetchSiteSections() {
+        return _.map(this._config.site_sections, (section) => {
+            let model = new SiteSectionViewModel();
+            model.title = section.title;
+            model.description = section.description;
+            model.tag = section.tag;
+            model.documentCount = this._fetchTaggedDocumentCount(section.tag);
+            return model;
+        });
+    }
 
     /**
-     * Fetch the tagged documents
+     * Fetch the tagged documents count for the given
+     * tag
      */
-    _fetchTaggedDocuments(count, tag) {
+    _fetchTaggedDocumentCount(tag) {
         let documents = this._documents.all();
-
-        return _.chain(documents)
-            .filter( function(doc) { return doc.tags.indexOf(tag) != -1; })
-            .sortBy("updateDate")
-            .reverse()
-            .take(count)
-            .value();
+        return _.filter(documents, (doc) => { return doc.tags.indexOf(tag) != -1; }).length;
     }
 
     /**

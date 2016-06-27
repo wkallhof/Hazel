@@ -8,7 +8,8 @@ var config = {
     // Your site sections for homepage. For each section below, the home page 
     // will display a section box that lists the document count for documents
     // that have a matching tag. Clicking the section link will list the documents.
-    site_sections: [{
+    site_sections: [
+        {
             'title': 'Tenuatus',
             'description': 'In tellus solent, me caelum ripis, ducere licebit fovebat.',
             'tag': 'manual'
