@@ -45,7 +45,7 @@
                 <% } %>
            </form>
 
-            <form id="myAwesomeDropzone" method="post" action="upload">
+            <form method="post" action="upload" class="js-dropzone dropzone" data-upload="uploads/">
                 <div class="dz-message needsclick">Drop files here or click to upload.</div>
             </form>
         </div>
@@ -56,9 +56,9 @@
 
 <link rel="stylesheet" href="vendor/dropzone/dropzone.css">
 <script type="text/javascript" src="vendor/dropzone/dropzone.js"></script>
+<script type="text/javascript">Dropzone.autoDiscover = false;</script>
 
 <script src="vendor/jquery.js" type="text/javascript"></script>
-<script src="vendor/autosize.js" type="text/javascript"></script>
 <script src="vendor/simplemde/simplemde.min.js" type="text/javascript"></script>
 <script src="scripts/slug.js" type="text/javascript"></script>
 <script src="scripts/edit.js" type="text/javascript"></script>

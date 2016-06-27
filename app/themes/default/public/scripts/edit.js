@@ -2,7 +2,8 @@ var SELECTORS = {
     MARKDOWN_INPUT: "textarea",
     FORM: "form",
     TITLE_INPUT: "#title",
-    DELETE: ".js-delete"
+    DELETE: ".js-delete",
+    DROPZONE: ".js-dropzone"
 };
 
 /**
@@ -16,28 +17,29 @@ var EditPage = function($scope) {
     this.$titleInput = $scope.find(SELECTORS.TITLE_INPUT);
     this.$deleteButton = $scope.find(SELECTORS.DELETE);
 
+    this.dropzone = new Dropzone(SELECTORS.DROPZONE);
+    this.simplemde = new SimpleMDE();
+
     this.bind();
 };
 EditPage.constructor = EditPage;
 EditPage.prototype = {
-    bind: function() {
-        // bind auto size
-        // autosize(this.$markdownInput);
-
-        var simplemde = new SimpleMDE();
-
-
-        var myDropzone = new Dropzone("form#myAwesomeDropzone");
-        myDropzone.on("success", function(file, responseText) {
-            console.log(responseText); // console should show the ID you pointed to
-            simplemde.value(simplemde.value()+ "\n![](uploads/"+responseText+")\n");
-            // do stuff with file.id ...
-        });
-
-        $("form#myAwesomeDropzone").addClass('dropzone');
-        
+    bind: function () {
+        this.dropzone.on("success", this.onDropzoneSuccess.bind(this));
         this.$titleInput.on("input propertychange paste", this.onTitleInputChange.bind(this));
         this.$deleteButton.on("click", this.onDeleteClick.bind(this));
+    },
+
+    /**
+     * Handle the event when the user successfully uploads a file via Dropzone
+     * @prop file [string]
+     * @prop responseText [string]
+     */    
+    onDropzoneSuccess: function (file, responseText) {
+        console.log(responseText); // console should show the ID you pointed to
+        // read the upload path from the elements data-upload attribute. 
+        var uploadPath = $(this.dropzone.element).data("upload") + responseText;
+        this.simplemde.value(this.simplemde.value()+ "\n![](" + uploadPath + ")\n");
     },
 
     /**
