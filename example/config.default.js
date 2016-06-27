@@ -5,7 +5,9 @@ var config = {
     // Your site title (format: page_title - site_title)
     site_title: "Example Wiki",
 
-    // Your site sections for homepage
+    // Your site sections for homepage. For each section below, the home page 
+    // will display a section box that lists the document count for documents
+    // that have a matching tag. Clicking the section link will list the documents.
     site_sections: [{
             'title': 'Tenuatus',
             'description': 'In tellus solent, me caelum ripis, ducere licebit fovebat.',
@@ -27,7 +29,7 @@ var config = {
     excerpt_length: 400,
 
     //Application base url
-    base: '/help/',
+    base: '/',
 
     // Path in which to store content (markdown files, etc.)
     content_dir: __dirname + "/content/",
@@ -46,7 +48,12 @@ var config = {
 
     // Set to true to enable HTTP Basic Authentication
     authentication: false,
+    // Set the Authentication mode. Options:
+    // - "all" : Requires authentication for all pages
+    // - "admin" : Requires authentication for only admin pages (edit / save / etc.). 
+    //             This allows for a public facing site
     authentication_mode: "admin",
+    // If using authentication, set the username and password here.
     credentials: {
         username: "",
         password: ""
