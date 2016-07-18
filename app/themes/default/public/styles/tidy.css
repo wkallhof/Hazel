@@ -1013,7 +1013,7 @@ body .before-main-wrapper .header-wrapper {
 }
 
 .before-main-wrapper .header-wrapper:after {
-  background-image: url("http://dkemhji6i1k0x.cloudfront.net/000_clients/128725/page/12872515336ztIZ.jpg");
+  background-image: url("//dkemhji6i1k0x.cloudfront.net/000_clients/128725/page/12872515336ztIZ.jpg");
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -1220,12 +1220,12 @@ h1.page-title {
   font-family: 'Muli';
   font-style: normal;
   font-weight: 300;
-  src: local('Muli Light'), local('Muli-Light'), url(http://fonts.gstatic.com/s/muli/v7/zR-6QGMCFX5j-6nbH_HpIQ.ttf) format('truetype');
+  src: local('Muli Light'), local('Muli-Light'), url(//fonts.gstatic.com/s/muli/v7/zR-6QGMCFX5j-6nbH_HpIQ.ttf) format('truetype');
 }
 
 @font-face {
   font-family: 'Muli';
   font-style: normal;
   font-weight: 400;
-  src: local('Muli'), url(http://fonts.gstatic.com/s/muli/v7/BfQP1MR3mJNaumtWa4Tizg.ttf) format('truetype');
+  src: local('Muli'), url(//fonts.gstatic.com/s/muli/v7/BfQP1MR3mJNaumtWa4Tizg.ttf) format('truetype');
 }
