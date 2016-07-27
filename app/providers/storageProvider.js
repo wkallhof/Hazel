@@ -19,6 +19,7 @@ class StorageProvider {
         this._parser = parserUtility;
 
         this._createDirectories();
+        this._setupFileStorage();
     }
 
         /**
@@ -38,7 +39,7 @@ class StorageProvider {
      * multer
      */
     _setupFileStorage() {
-        this._storageSetup = multer.diskStorage({
+        let storage = multer.diskStorage({
             destination: function (req, file, cb) {
                 cb(null, this._config.uploads_dir);
             }.bind(this),
@@ -48,7 +49,7 @@ class StorageProvider {
             }
         });
          
-        this._uploadImageHandler = multer({ storage: this._storageSetup }).single("file");
+        this._uploadImageHandler = multer({ storage: storage }).single("file");
     }
 
     /**
