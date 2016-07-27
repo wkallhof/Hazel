@@ -4,6 +4,7 @@ const fs = require("fs");
 const _ = require("lodash");
 const path = require("path");
 const _s = require("underscore.string");
+const multer = require("multer");
 
 /**
  * Handles all storage related tasks. This
@@ -20,7 +21,7 @@ class StorageProvider {
         this._createDirectories();
     }
 
-    /**
+        /**
      * Handles creating directories
      * for storing data and content
      */
@@ -28,7 +29,26 @@ class StorageProvider {
         try {
             fs.mkdirSync(this._config.content_dir);
             fs.mkdirSync(this._config.data_dir);
+            fs.mkdirSync(this._config.uploads_dir);
         } catch (e) { /* Do nothing */ }
+    }
+
+    /**
+     * Handles setting up the file storage using
+     * multer
+     */
+    _setupFileStorage() {
+        this._storageSetup = multer.diskStorage({
+            destination: function (req, file, cb) {
+                cb(null, this._config.uploads_dir);
+            }.bind(this),
+            filename: function (req, file, cb) {
+                let filename = file.originalname.substr(0, file.originalname.lastIndexOf('.')) + '-' + Date.now() + file.originalname.substr(file.originalname.lastIndexOf('.'));
+                cb(null, filename);
+            }
+        });
+         
+        this._uploadImageHandler = multer({ storage: this._storageSetup }).single("file");
     }
 
     /**
@@ -134,6 +154,14 @@ class StorageProvider {
             console.log("Tried to open file: " + fileName + " as object. ");
             return null;
         }
+    }
+
+    /**
+     * Handles reading a file on disk and converting to
+     * an object.
+     */    
+    storeFile(req, res, callback) {
+        return this._uploadImageHandler(req, res, callback);
     }
 
     /**

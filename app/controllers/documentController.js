@@ -4,7 +4,6 @@ const marked = require("marked");
 const Document = require("../models/document");
 const DetailViewModel = require("../models/detailViewModel");
 const EditViewModel = require("../models/editViewModel");
-const multer = require("multer");
 const _ = require("lodash");
 
 class DocumentController {
@@ -169,32 +168,17 @@ class DocumentController {
      * POST : Image uploading handler
      */
     upload(req, res, next) {
-
-        var upload_path = this._config.uploads_dir;
-        var filename = "";
-        var storage = multer.diskStorage({
-            destination: function (req, file, cb) {
-                cb(null, upload_path);
-            },
-            filename: function (req, file, cb) {
-                filename = file.originalname.substr(0, file.originalname.lastIndexOf('.')) + '-' + Date.now() + file.originalname.substr(file.originalname.lastIndexOf('.'));
-                cb(null, filename);
-            }
-        });
-         
-        var uploadimage = multer({ storage: storage }).single("file");
-
-        uploadimage(req, res, function(err) {
+        this._storageProvider.storeFile(req, res, function(err) {
             if(err) {
                 return res.status(422).send(err);
             }
             
-            if ( !req.file.mimetype.startsWith( 'image/' ) ) {
+            if ( !req.file.mimetype.startsWith( "image/" ) ) {
                 return res.status( 422 ).json( {
-                    error : 'The uploaded file must be an image'
+                    error : "The uploaded file must be an image"
                 } );
             }
-            return res.status( 200 ).send( filename );
+            return res.status( 200 ).send( req.file.filename );
         });
     }
 
