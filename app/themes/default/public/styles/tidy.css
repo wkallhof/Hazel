@@ -2,6 +2,10 @@
 
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 
+/** {
+    outline: 1px solid red;
+}*/
+
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -1038,10 +1042,17 @@ body .before-main-wrapper .header-wrapper {
 
 .navbar-form {
   float: left;
-  margin-left: 40px;
+  margin-left: 18px;
+}
+
+@media (min-width: 768px) {
+  .navbar-form {
+    margin-left: 40px;
+  }
 }
 
 .navbar-form .form-control {
+  display: inline;
   color: #353535;
   font-size: 14px;
   width: 300px;
@@ -1238,24 +1249,19 @@ h1.page-title {
 
 .kb-section {
   text-align: center;
-  display: inline-block;
-  width: 30%;
+  /*display: inline-block;*/
   border: 1px solid #e0e0e0;
-  margin: 0 1% 20px;
-  padding: 1.5em 1em;
+  padding: 25px;
+  margin-top: 10px;
   cursor: pointer;
-  -webkit-transition: background .15s;
-  -moz-transition: background .15s;
-  -o-transition: background .15s;
-  transition: background .15s;
   vertical-align: top;
 }
 
 .kb-section .description {
   font-size: 14px;
   line-height: 20px;
-  padding-left: 20%;
-  padding-right: 20%;
+  padding-left: 20px;
+  padding-right: 20px;
 
   display: block;
 }

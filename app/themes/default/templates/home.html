@@ -55,13 +55,15 @@
                 <div class="row knowledge-base-row">
                     <% for(var i = 0; i < siteSections.length; i++){ var section = siteSections[i];%>
                     <!-- SECTION -->
-                    <a class="col-sm-4 kb-section" href="~<%= section.tag %>">
-                        <h2>
-                            <%= section.title %>
-                        </h2>
-                        <span class="description"><%= section.description %><span>
-                        <span class="link"><%= section.documentCount %> documents</span>
-                    </a>
+                    <div class="col-sm-4" >
+                        <div class="kb-section">
+                            <h2>
+                                <%= section.title %>
+                            </h2>
+                            <span class="description"><%= section.description %><span>
+                            <a class="link" href="~<%= section.tag %>"><%= section.documentCount %> documents</a>
+                        </div>
+                    </div>
                     <% } %>
 
                 </div>
