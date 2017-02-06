@@ -172,12 +172,6 @@ class DocumentController {
             if(err) {
                 return res.status(422).send(err);
             }
-            
-            if ( !req.file.mimetype.startsWith( "image/" ) ) {
-                return res.status( 422 ).json( {
-                    error : "The uploaded file must be an image"
-                } );
-            }
             return res.status( 200 ).send( req.file.filename );
         });
     }
