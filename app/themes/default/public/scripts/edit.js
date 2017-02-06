@@ -39,7 +39,13 @@ EditPage.prototype = {
         console.log(responseText); // console should show the ID you pointed to
         // read the upload path from the elements data-upload attribute.
         var uploadPath = $(this.dropzone.element).data("upload") + responseText;
-        this.simplemde.value(this.simplemde.value()+ "\n![" + uploadPath + "](" + uploadPath + ")\n");
+        var linkToUploadedFile = "(" + uploadPath + ")";
+        if ( file.type.startsWith( "image/" ) ) {
+            linkToUploadedFile = "![]" + linkToUploadedFile;
+        } else {
+            linkToUploadedFile = "[" + responseText + "]" + linkToUploadedFile;
+        }
+        this.simplemde.value(this.simplemde.value() + "\n" + linkToUploadedFile + "\n");
     },
 
     /**
