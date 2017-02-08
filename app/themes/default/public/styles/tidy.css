@@ -1022,7 +1022,7 @@ body .before-main-wrapper .header-wrapper {
 }
 
 .before-main-wrapper .header-wrapper:after {
-  background-image: url("http://dkemhji6i1k0x.cloudfront.net/000_clients/128725/page/12872515336ztIZ.jpg");
+  background-image: url("../media/bg.jpg");
   background-size: cover;
   background-repeat: no-repeat;
 }
