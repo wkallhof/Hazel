@@ -50,6 +50,7 @@
   ],
   "main": "index.js",
   "scripts": {
+    "start": "node ./example/server.js",
     "test": "mocha",
     "test-cov": "istanbul cover node_modules/mocha/bin/_mocha",
     "test-ci": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly"
