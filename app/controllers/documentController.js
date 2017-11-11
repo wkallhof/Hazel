@@ -118,7 +118,7 @@ class DocumentController {
         this._searchProvider.indexUpdate(document);
 
         // remove old document if one existed
-        if (originalSlug && originalSlug.length > 0 & originalSlug !== slug) {
+        if (originalSlug && originalSlug.length > 0 && originalSlug !== slug) {
             console.log("removing old document: " + originalSlug);
             this._documents.delete(originalSlug);
             this._searchProvider.indexRemove({ slug: originalSlug});
