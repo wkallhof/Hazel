@@ -1,9 +1,9 @@
 import { Get, Post, Controller, Body, HttpStatus, Param, HttpException, ValidationPipe, UsePipes, Res, Inject } from '@nestjs/common';
-import { IDocumentService } from '../services/document/document.service';
+import { IDocumentService } from './document.service';
 import { Response } from "express";
-import DI from '../di';
-import { BaseController } from './base.controller';
-import Document from "../services/document/document";
+import DI from '../../di';
+import { BaseController } from '../shared/base.controller';
+import Document from "./document";
 
 
 @Controller()  

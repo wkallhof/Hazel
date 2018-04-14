@@ -1,6 +1,6 @@
 import { Component, Inject } from '@nestjs/common';
 import Document from "../document/document";
-import { ServiceResult, ServiceDataResult } from '../service-result';
+import { ServiceResult, ServiceDataResult } from '../shared/service-result';
 import * as _ from "lodash";
 import * as path from "path";
 import * as fs from "fs-extra";

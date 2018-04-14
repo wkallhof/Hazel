@@ -1,5 +1,5 @@
-import { IStorageService } from "./services/storage/storage.service";
-import { IDocumentParserService } from "./services/document/document-parser.service";
+import { IStorageService } from "./features/storage/storage.service";
+import { IDocumentParserService } from "./features/document/document-parser.service";
 import { Component } from "@nestjs/common";
 
 export class HazelConfig{

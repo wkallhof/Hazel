@@ -1,12 +1,12 @@
 import { Module, DynamicModule, ValidationPipe, INestApplication } from '@nestjs/common';
-import { HomeController } from './controllers/home.controller';
-import { DocumentController } from "./controllers/document.controller";
+import { HomeController } from './features/home/home.controller';
+import { DocumentController } from "./features/document/document.controller";
 
-import { IDocumentService, DocumentService } from "./services/document/document.service";
+import { IDocumentService, DocumentService } from "./features/document/document.service";
 import DI from './di';
-import { DocumentParserService, IDocumentParserService } from './services/document/document-parser.service';
-import { MarkdownDiskStorageService, IStorageService } from './services/storage/storage.service';
-import { ServiceResult } from './services/service-result';
+import { DocumentParserService, IDocumentParserService } from './features/document/document-parser.service';
+import { MarkdownDiskStorageService, IStorageService } from './features/storage/storage.service';
+import { ServiceResult } from './features/shared/service-result';
 import { NestFactory } from '@nestjs/core';
 import { GlobalExceptionFilter } from './filters/global-exception.filter';
 

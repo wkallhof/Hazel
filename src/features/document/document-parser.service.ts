@@ -1,5 +1,5 @@
 import Document from "./document";
-import { ServiceDataResult } from "../service-result";
+import { ServiceDataResult } from "../shared/service-result";
 import { Component } from "@nestjs/common";
 import DocumentMeta from "./document-meta";
 

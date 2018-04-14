@@ -4,7 +4,9 @@ import { HazelConfig, HazelServices } from '../src/hazel.config';
 async function server() {
 
     const config = new HazelConfig({
-        appTitle: "Example app"
+        appTitle: "Example app",
+        dataDirectory: __dirname + "/data/",
+        contentDirectory: __dirname + "/content/"
     });
 
     const hazel = new Hazel(config, new HazelServices());
