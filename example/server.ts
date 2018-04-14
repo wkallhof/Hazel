@@ -1,14 +1,10 @@
 import { Hazel } from '../src/hazel';
-import { DocumentParserService } from '../src/services/document/document-parser.service';
-import { MarkdownDiskStorageService } from '../src/services/storage/storage.service';
+import { HazelConfig } from '../src/hazel.config';
 
 async function server() {
-
-    var documentParserService = new DocumentParserService()
-    var storageService = new MarkdownDiskStorageService(documentParserService);
-    await storageService.initializeAsync();
-
-    const hazel = new Hazel(storageService, documentParserService);
+    const hazel = new Hazel(new HazelConfig({
+        appTitle : "Example app"
+    }));
     const app = await hazel.init();
 
     const port = process.env.PORT || 3000;
