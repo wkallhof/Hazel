@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node index.js",
-    "start:watch": "nodemon",
+    "watch": "nodemon",
     "prestart:prod": "tsc",
     "start:prod": "node dist/main.js"
   },

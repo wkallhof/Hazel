@@ -11,7 +11,8 @@ npm-debug.log
 .DS_Store
 
 # example
-/quick-start
+example/content/*
+example/data/*
 
 # tests
 /test

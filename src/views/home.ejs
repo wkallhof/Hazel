@@ -1,0 +1,30 @@
+<%# Model : HomeViewModel %>
+<%# %>
+
+<%- include("layout-top", {title: title}); %>
+
+<section>
+<h2>Search</h2>
+</section>
+
+<section>
+    <h2>Documents</h2>
+
+    <%# RECENT DOCUMENTS %>
+    <h3>Recent Documents</h3>
+    <ul>
+     <% recentDocuments.forEach((document) => {%>
+        <li><a href="/<%= document.slug %>"><%= document.title %></a></li>
+     <%});%>
+    </ul>
+
+    <%# RANDOM DOCUMENTS %>
+    <h3>Random Documents</h3>
+    <ul>
+        <% randomDocuments.forEach((document) => {%>
+            <li><a href="/<%= document.slug %>"><%= document.title %></a></li>
+        <%});%>
+    </ul>
+</section>
+
+<%- include("layout-bottom"); %>

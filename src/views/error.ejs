@@ -1,6 +1,6 @@
 <%# Model : Error %>
 
-<%- include("layout-top"); %>
+<%- include("layout-top", {title: error.status}); %>
 
 <div>
     <h2><%= error.status %></h2>
