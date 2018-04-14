@@ -7,6 +7,7 @@ import * as fs from "fs-extra";
 import * as _s from "underscore.string";
 import DI from '../../di';
 import { IDocumentParserService } from '../document/document-parser.service';
+import { HazelConfig } from '../../hazel.config';
 
 
 export interface IStorageService{
@@ -25,13 +26,12 @@ export class MarkdownDiskStorageService implements IStorageService {
      *          SERVICE IMPLEMENTATION            *
      *--------------------------------------------*/
 
-    //TODO: pull from settings
-    private readonly _contentDir: string = path.join(__dirname, "content");
-    private readonly _dataDir: string = path.join(__dirname, "data");
     private readonly _parser: IDocumentParserService;
+    private readonly _config: HazelConfig;
     
-    constructor(@Inject(DI.IDocumentParserService) documentParserService: IDocumentParserService){
+    constructor(@Inject(DI.HazelConfig) config: HazelConfig, @Inject(DI.IDocumentParserService) documentParserService: IDocumentParserService){
         this._parser = documentParserService;
+        this._config = config;
     }
 
     public async initializeAsync(): Promise<MarkdownDiskStorageService> {
@@ -43,7 +43,7 @@ export class MarkdownDiskStorageService implements IStorageService {
         if (slug == null)
             return new ServiceDataResult<Document>({ success: false, message: "Slug not provided" });
         
-        const filePath = path.join(this._contentDir, slug + ".md");
+        const filePath = path.join(this._config.contentDirectory, slug + ".md");
 
         // try to read the file on disk
         try {
@@ -64,7 +64,7 @@ export class MarkdownDiskStorageService implements IStorageService {
         }
     }
     public async storeDocumentAsync(document: any): Promise<ServiceResult> {
-        let filePath = path.join(this._contentDir, document.slug + ".md");
+        let filePath = path.join(this._config.contentDirectory, document.slug + ".md");
         let result = await this._parser.convertDocumentToFileContentAsync(document);
         if (!result.success)
             return new ServiceResult({ success: false, message: result.message });    
@@ -78,7 +78,7 @@ export class MarkdownDiskStorageService implements IStorageService {
     }
 
     public async deleteDocumentAsync(document: any): Promise<ServiceResult> {
-        let filePath = path.join(this._contentDir, document.slug + ".md");
+        let filePath = path.join(this._config.contentDirectory, document.slug + ".md");
 
         try {
             await fs.unlink(filePath);
@@ -90,7 +90,7 @@ export class MarkdownDiskStorageService implements IStorageService {
 
     public async getAllDocumentsAsync(): Promise<ServiceDataResult<Document[]>> {
         try {
-            const fileNames = await fs.readdir(this._contentDir);
+            const fileNames = await fs.readdir(this._config.contentDirectory);
             const validFiles = _.filter(fileNames, (fileName) => {
                 return fileName.length > 3 && fileName.endsWith(".md");
             });
@@ -114,7 +114,7 @@ export class MarkdownDiskStorageService implements IStorageService {
     }
 
     public async storeObjectAsync<T>(key: string, data: any): Promise<ServiceResult> {
-        let filePath = path.join(this._dataDir, key);
+        let filePath = path.join(this._config.dataDirectory, key);
 
         try {
             await fs.writeFile(filePath, JSON.stringify(data), "utf8");
@@ -125,7 +125,7 @@ export class MarkdownDiskStorageService implements IStorageService {
     }
 
     public async readObjectAsync(key: string): Promise<ServiceDataResult<any>> {
-        let filePath = path.join(this._dataDir, key);
+        let filePath = path.join(this._config.dataDirectory, key);
 
         // try to read the file on disk
         try {
@@ -160,8 +160,8 @@ export class MarkdownDiskStorageService implements IStorageService {
     private async createDirectoriesAsync() {
         try {
             await Promise.all([
-                fs.ensureDir(this._contentDir),
-                fs.ensureDir(this._dataDir)
+                fs.ensureDir(this._config.contentDirectory),
+                fs.ensureDir(this._config.dataDirectory)
             ]);
         } catch (e) { /* Do nothing */ }
     }

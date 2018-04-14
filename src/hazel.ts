@@ -12,31 +12,33 @@ import { GlobalExceptionFilter } from './filters/global-exception.filter';
 
 import * as express from 'express';
 import * as path from 'path';
-import { HazelConfig } from './hazel.config';
+import { HazelConfig, HazelServices } from './hazel.config';
 
 export class Hazel{
     private _config: HazelConfig;
     private _app: INestApplication;
+    private _services: HazelServices;
 
-    constructor(config: HazelConfig) {
+    constructor(config: HazelConfig, services: HazelServices) {
         this._config = config;
+        this._services = services;
     }
     
     async init(): Promise<INestApplication> {
 
         // configure parser service if not set
-        if (this._config.documentParserService == null)
-            this._config.documentParserService = new DocumentParserService();
+        if (this._services.documentParserService == null)
+            this._services.documentParserService = new DocumentParserService();
         
         // configure storage service if not set
-        if (this._config.storageService == null) {
-            const storageService = new MarkdownDiskStorageService(this._config.documentParserService);
+        if (this._services.storageService == null) {
+            const storageService = new MarkdownDiskStorageService(this._config, this._services.documentParserService);
             await storageService.initializeAsync();
-            this._config.storageService = storageService;
+            this._services.storageService = storageService;
         }
 
         // create application module
-        this._app = await NestFactory.create(HazelModule.create(this._config));
+        this._app = await NestFactory.create(HazelModule.create(this._config, this._services));
 
         // setup server and middleware
         this._app.useGlobalPipes(new ValidationPipe());
@@ -56,15 +58,15 @@ export class Hazel{
 }
 
 class HazelModule {
-    static create(config: HazelConfig): DynamicModule {
+    static create(config: HazelConfig, services: HazelServices): DynamicModule {
         
         return {
             module: HazelModule,
             controllers: [HomeController, DocumentController],
             components: [
                 { provide: DI.IDocumentService, useClass: DocumentService },
-                { provide: DI.IDocumentParserService, useFactory: () => config.documentParserService },
-                { provide: DI.IStorageService, useFactory: () => config.storageService },
+                { provide: DI.IDocumentParserService, useFactory: () => services.documentParserService },
+                { provide: DI.IStorageService, useFactory: () => services.storageService },
                 { provide: DI.HazelConfig, useFactory: () => config }
             ],
           };

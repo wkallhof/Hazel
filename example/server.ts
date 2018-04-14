@@ -1,10 +1,13 @@
 import { Hazel } from '../src/hazel';
-import { HazelConfig } from '../src/hazel.config';
+import { HazelConfig, HazelServices } from '../src/hazel.config';
 
 async function server() {
-    const hazel = new Hazel(new HazelConfig({
-        appTitle : "Example app"
-    }));
+
+    const config = new HazelConfig({
+        appTitle: "Example app"
+    });
+
+    const hazel = new Hazel(config, new HazelServices());
     const app = await hazel.init();
 
     const port = process.env.PORT || 3000;
