@@ -34,9 +34,8 @@ export class MarkdownDiskStorageService implements IStorageService {
         this._config = config;
     }
 
-    public async initializeAsync(): Promise<MarkdownDiskStorageService> {
-        await this.createDirectoriesAsync();
-        return this;
+    public async initializeAsync(): Promise<ServiceResult> {
+        return await this.createDirectoriesAsync();
     }
     
     public async readDocumentAsync(slug: string): Promise<ServiceDataResult<Document>> {
@@ -157,13 +156,17 @@ export class MarkdownDiskStorageService implements IStorageService {
         return _s.titleize(_s.humanize(slug.trim()));
     }
     
-    private async createDirectoriesAsync() {
+    private async createDirectoriesAsync() : Promise<ServiceResult> {
         try {
             await Promise.all([
                 fs.ensureDir(this._config.contentDirectory),
                 fs.ensureDir(this._config.dataDirectory)
             ]);
-        } catch (e) { /* Do nothing */ }
+
+            return new ServiceResult({ success: true });
+        } catch (e) { 
+            return new ServiceResult({success: false, message: "Error creating directories: "+ (<Error>e).message})
+         }
     }
 
     /**

@@ -4,4 +4,5 @@ export class HomeViewModel{
     public title: string;
     public recentDocuments: Array<Document>;
     public randomDocuments: Array<Document>;
+    public popularDocuments: Array<Document>;
 }

@@ -35,6 +35,19 @@ export class DocumentService implements IDocumentService {
      *--------------------------------------------*/
     
     /**
+     * Initializes the document service by getting all documents up front
+     * for our in-memory storage for performance reasons.
+     */
+    public async initializeAsync(): Promise<ServiceResult>{
+        var result = await this._storageService.getAllDocumentsAsync();
+        if (!result.success)
+            return new ServiceResult({ success: false, message: "Error initializing document service: " + result.message });
+        
+        this._documents = result.data;
+        return new ServiceResult({ success: true });
+    }
+    
+    /**
      * Gets all documents in the document service
      * 
      * @returns {Promise<ServiceDataResult<Document[]>>} 

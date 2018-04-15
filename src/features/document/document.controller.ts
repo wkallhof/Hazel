@@ -4,16 +4,20 @@ import { Response } from "express";
 import DI from '../../di';
 import { BaseController } from '../shared/base.controller';
 import Document from "./document";
+import { IAnalyticsService } from '../analytics/analytics.service';
 
 
 @Controller()  
 export class DocumentController extends BaseController {
 
+    private readonly _analyticsService: IAnalyticsService;
     private readonly _documentService: IDocumentService;
 
-    constructor(@Inject(DI.IDocumentService) documentService: IDocumentService) {
+    constructor(@Inject(DI.IDocumentService) documentService: IDocumentService,
+                @Inject(DI.IAnalyticsService) analyticsService: IAnalyticsService) {
         super();
         this._documentService = documentService;
+        this._analyticsService = analyticsService;
     }
 
     @Get(":slug")
@@ -25,7 +29,10 @@ export class DocumentController extends BaseController {
         if (!result.success)
             this.NotFound(result.message);
         
-        return this.View(res, "document", { document: result.data });
+        const document = result.data;
+        await this._analyticsService.incrementViewCountAsync(document.slug);
+        
+        return this.View(res, "document", { document: document});
     }
 
     @Post(":slug")

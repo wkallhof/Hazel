@@ -25,6 +25,14 @@
             <li><a href="/<%= document.slug %>"><%= document.title %></a></li>
         <%});%>
     </ul>
+
+    <%# POPULAR DOCUMENTS %>
+    <h3>Popular Documents</h3>
+    <ul>
+        <% popularDocuments.forEach((document) => {%>
+            <li><a href="/<%= document.slug %>"><%= document.title %></a></li>
+        <%});%>
+    </ul>
 </section>
 
 <%- include("layout-bottom"); %>

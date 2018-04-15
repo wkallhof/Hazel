@@ -13,6 +13,7 @@ import { GlobalExceptionFilter } from './filters/global-exception.filter';
 import * as express from 'express';
 import * as path from 'path';
 import { HazelConfig, HazelServices } from './hazel.config';
+import { JsonStorageAnalyticsService } from './features/analytics/analytics.service';
 
 export class Hazel{
     private _config: HazelConfig;
@@ -30,12 +31,10 @@ export class Hazel{
         if (this._services.documentParserService == null)
             this._services.documentParserService = new DocumentParserService();
         
-        // configure storage service if not set
-        if (this._services.storageService == null) {
-            const storageService = new MarkdownDiskStorageService(this._config, this._services.documentParserService);
-            await storageService.initializeAsync();
-            this._services.storageService = storageService;
-        }
+        // configure async services if not set
+        await this.loadStorageService();
+        await this.loadAnalyticsService();
+        await this.loadDocumentsService();
 
         // create application module
         this._app = await NestFactory.create(HazelModule.create(this._config, this._services));
@@ -55,6 +54,39 @@ export class Hazel{
             console.log("✔ Hazel server listening at %s:%d ", ip, port);
         });
     }
+
+    private async loadStorageService(): Promise<void> {
+        if (this._services.storageService != null) return;
+        
+        const storageService = new MarkdownDiskStorageService(this._config, this._services.documentParserService);
+        let result = await storageService.initializeAsync();
+        if (!result.success)
+            throw new Error(result.message);
+        
+        this._services.storageService = storageService;
+    }
+
+    private async loadAnalyticsService(): Promise<void> {
+        if (this._services.analyticsService != null) return;
+
+        const analyticsService = new JsonStorageAnalyticsService(this._services.storageService);
+        let result = await analyticsService.initializeAsync();
+        if (!result.success)
+            throw new Error(result.message);
+        
+        this._services.analyticsService = analyticsService;
+    }
+
+    private async loadDocumentsService(): Promise<void> {
+        if (this._services.documentsService != null) return;
+
+        const documentService = new DocumentService(this._services.storageService);
+        let result = await documentService.initializeAsync();
+        if (!result.success)
+            throw new Error(result.message);
+        
+        this._services.documentsService = documentService;
+    }
 }
 
 class HazelModule {
@@ -64,9 +96,10 @@ class HazelModule {
             module: HazelModule,
             controllers: [HomeController, DocumentController],
             components: [
-                { provide: DI.IDocumentService, useClass: DocumentService },
+                { provide: DI.IDocumentService, useFactory: () => services.documentsService },
                 { provide: DI.IDocumentParserService, useFactory: () => services.documentParserService },
                 { provide: DI.IStorageService, useFactory: () => services.storageService },
+                { provide: DI.IAnalyticsService, useFactory: () => services.analyticsService },
                 { provide: DI.HazelConfig, useFactory: () => config }
             ],
           };
