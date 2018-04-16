@@ -8,8 +8,11 @@ import { ISearchService } from "./features/search/search.service";
 export class HazelConfig{
 
     public appTitle: string = "Hazel";
-    public dataDirectory: string = __dirname + "/data/";
-    public contentDirectory: string = __dirname + "/content/";
+    public dataDirectory: string = __dirname + "/data";
+    public contentDirectory: string = __dirname + "/content";
+    public viewsDirectory: string = __dirname + "/views";
+    public publicDirectory: string = __dirname + "/public";
+    public viewEngine: string = "ejs";
 
     public constructor(init?:Partial<HazelConfig>) {
         Object.assign(this, init);

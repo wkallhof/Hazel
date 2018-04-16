@@ -45,9 +45,9 @@ export class Hazel{
         // setup server and middleware
         this._app.useGlobalPipes(new ValidationPipe());
         this._app.useGlobalFilters(new GlobalExceptionFilter());
-        this._app.use(express.static(path.join(__dirname, 'public')));
-        this._app.set('views', __dirname + '/views');
-        this._app.set('view engine', 'ejs');
+        this._app.use(express.static(this._config.publicDirectory));
+        this._app.set('views',this._config.viewsDirectory);
+        this._app.set('view engine', this._config.viewEngine);
 
         return this._app;
     }
