@@ -18,6 +18,11 @@ export interface ISearchService{
     indexRemoveAsync(document: Document): Promise<ServiceResult>
 }
 
+
+    /*--------------------------------------------*
+     *          SERVICE IMPLEMENTATION            *
+     *--------------------------------------------*/
+
 @Component()
 export class SimpleRegexSearchService implements ISearchService {
 
@@ -54,7 +59,7 @@ export class SimpleRegexSearchService implements ISearchService {
     }
 
     public GetMatchingResult(searchTerm: string, document: Document): number {
-        var matches = document.markdown.toLowerCase().match(searchTerm.toLowerCase());
+        var matches = document.rawContent.toLowerCase().match(searchTerm.toLowerCase());
         return matches == null ? 0 : matches.length;
     }
 }

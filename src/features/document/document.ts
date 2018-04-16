@@ -6,7 +6,7 @@ export default class Document{
     @IsNotEmpty()
     public slug: string = "";
     
-    public markdown : string = "";
+    public rawContent : string = "";
     public html: string = "";
     
     public updateDate : number = null;

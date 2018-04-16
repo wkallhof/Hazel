@@ -2,24 +2,31 @@ import Document from "./document";
 import { ServiceDataResult } from "../shared/service-result";
 import { Component } from "@nestjs/common";
 import DocumentMeta from "./document-meta";
+import marked = require("marked");
 
 export interface IDocumentParserService{
-    getDocumentFromFileContentAsync(fileContent : string) : Promise<ServiceDataResult<Document>>
-    convertDocumentToFileContentAsync(document : Document) : Promise<ServiceDataResult<string>>
+    convertFromStorageFormatAsync(storageFormat : string) : Promise<ServiceDataResult<Document>>
+    convertToStorageFormatAsync(document: Document): Promise<ServiceDataResult<string>>
+    getHtmlFromContentAsync(content: string): Promise<ServiceDataResult<string>>
 }
 
+
+    /*--------------------------------------------*
+     *          SERVICE IMPLEMENTATION            *
+     *--------------------------------------------*/
+
 @Component()
-export class DocumentParserService implements IDocumentParserService {
+export class MarkdownDocumentParserService implements IDocumentParserService {
 
     private metaRegex: RegExp = /<!--META (.*) -->/;
     private missingLinkRegex: RegExp = /\[(.*)\]\(\)/;
 
-    public async getDocumentFromFileContentAsync(fileContent: string): Promise<ServiceDataResult<Document>> {
-        if (fileContent == null || fileContent.length <= 0)
+    public async convertFromStorageFormatAsync(storageFormat: string): Promise<ServiceDataResult<Document>> {
+        if (storageFormat == null || storageFormat.length <= 0)
             return new ServiceDataResult({ success: false, message:"File content was empty"});
 
-        const metaData = this.extractMetaData(fileContent);
-        let markdown = this.extractContent(fileContent);
+        const metaData = this.extractMetaData(storageFormat);
+        let rawContent = this.extractContent(storageFormat);
 
         let document = new Document();
 
@@ -32,17 +39,17 @@ export class DocumentParserService implements IDocumentParserService {
         }
 
         // add the content we have
-        if (markdown) {
-            if (markdown.startsWith("\n"))
-                markdown = markdown.substring(1);
+        if (rawContent) {
+            if (rawContent.startsWith("\n"))
+            rawContent = rawContent.substring(1);
             
-            document.markdown = markdown;
+            document.rawContent = rawContent;
         }
 
         return new ServiceDataResult({ success: true, data: document });
     }
 
-    public async convertDocumentToFileContentAsync(document: Document): Promise<ServiceDataResult<string>> {
+    public async convertToStorageFormatAsync(document: Document): Promise<ServiceDataResult<string>> {
         if (document == null)
             return new ServiceDataResult({ success: false, message:"Document was null"});
 
@@ -55,8 +62,13 @@ export class DocumentParserService implements IDocumentParserService {
 
         const metaString = JSON.stringify(metaData);
         const commentString = `<!--META ${metaString} -->`;
-        const result = `${commentString}\n${document.markdown}`;
+        const result = `${commentString}\n${document.rawContent}`;
         return new ServiceDataResult({ success: true, data: result });
+    }
+
+    public async getHtmlFromContentAsync(content: string): Promise<ServiceDataResult<string>>
+    {
+        return new ServiceDataResult({ success: true, data: marked(content) });
     }
 
     private extractMetaData(fileContent) : DocumentMeta {

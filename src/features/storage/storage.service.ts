@@ -47,7 +47,7 @@ export class MarkdownDiskStorageService implements IStorageService {
         // try to read the file on disk
         try {
             let fileContent = await fs.readFile(filePath, "utf8");
-            let result = await this._parser.getDocumentFromFileContentAsync(fileContent);
+            let result = await this._parser.convertFromStorageFormatAsync(fileContent);
             if (!result.success)
                 return new ServiceDataResult<Document>(result);
 
@@ -64,7 +64,7 @@ export class MarkdownDiskStorageService implements IStorageService {
     }
     public async storeDocumentAsync(document: any): Promise<ServiceResult> {
         let filePath = path.join(this._config.contentDirectory, document.slug + ".md");
-        let result = await this._parser.convertDocumentToFileContentAsync(document);
+        let result = await this._parser.convertToStorageFormatAsync(document);
         if (!result.success)
             return new ServiceResult({ success: false, message: result.message });    
 

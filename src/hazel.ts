@@ -4,7 +4,7 @@ import { DocumentController } from "./features/document/document.controller";
 
 import { IDocumentService, DocumentService } from "./features/document/document.service";
 import DI from './di';
-import { DocumentParserService, IDocumentParserService } from './features/document/document-parser.service';
+import { MarkdownDocumentParserService, IDocumentParserService } from './features/document/document-parser.service';
 import { MarkdownDiskStorageService, IStorageService } from './features/storage/storage.service';
 import { ServiceResult } from './features/shared/service-result';
 import { NestFactory } from '@nestjs/core';
@@ -31,7 +31,7 @@ export class Hazel{
 
         // configure parser service if not set
         if (this._services.documentParserService == null)
-            this._services.documentParserService = new DocumentParserService();
+            this._services.documentParserService = new MarkdownDocumentParserService();
         
         // configure async services if not set
         await this.loadStorageService();

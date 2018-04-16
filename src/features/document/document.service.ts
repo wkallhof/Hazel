@@ -15,7 +15,8 @@ export interface IDocumentService{
     allAsync(): Promise<ServiceDataResult<Array<Document>>>;
     getAsync(slug : string): Promise<ServiceDataResult<Document>>;
     addAsync(document : Document): Promise<ServiceResult>;
-    updateAsync(document : Document): Promise<ServiceResult>;
+    updateAsync(document: Document): Promise<ServiceResult>;
+    existsAsync(slug: string): Promise<ServiceDataResult<boolean>>;
     deleteAsync(slug: string): Promise<ServiceResult>;
 }
 
@@ -115,16 +116,21 @@ export class DocumentService implements IDocumentService {
         if (document == null)
             return new ServiceResult({ success: false, message: "Null document while updating" });
         
-        var match = _.find(this._documents, { "slug": document.slug });
-        if (match == null)
-            return new ServiceResult({ success: false, message: "Document doesn't exists" });
-        
-        match = document;
-        match.updateDate = Date.now();
-        match.tags = document.tags || [];
-        const result = await this._storageService.storeDocumentAsync(match);
+        // update date
+        document.updateDate = Date.now();
+
+        // ensure we have an existing doc by finding the index
+        var index = _.findIndex(this._documents, { slug: document.slug });
+        if (index < 0)
+            return new ServiceResult({ success: false, message: "Document doesn't exists" });    
+
+        // persist the document
+        const result = await this._storageService.storeDocumentAsync(document);
         if (!result.success)
-            return new ServiceResult(result);    
+            return new ServiceResult(result);
+        
+        // slip the new document into to the array over the old one
+        this._documents.splice(index, 1, document);
 
         return new ServiceResult({ success: true });
     }
@@ -148,5 +154,22 @@ export class DocumentService implements IDocumentService {
         _.remove(this._documents, { "slug": slug });
 
         return new ServiceResult({ success: true });
+    }
+
+    /**
+     * Checks if a document exists
+     * 
+     * @param slug Document slug
+     * @returns {Promise<ServiceDataResult<boolean>>} 
+     */
+    public async existsAsync(slug: string): Promise<ServiceDataResult<boolean>> {
+        if (!slug)
+            return new ServiceDataResult<boolean>({ success: false, message: "No slug provided" });
+        
+        var index = _.findIndex(this._documents, { slug: slug });
+        return new ServiceDataResult<boolean>({
+            success: true,
+            data : index > 0 
+        });
     }
 }

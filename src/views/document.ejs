@@ -4,6 +4,10 @@
 
 <div>
     <h2><%= document.title %></h2>
+
+    <%- document.html %>
+
+    <a href="<%= document.slug%>/edit">Edit</a>
 </div>
 
 <%- include("layout-bottom"); %>

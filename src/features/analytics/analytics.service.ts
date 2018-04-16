@@ -16,6 +16,11 @@ export interface IAnalyticsService{
     getViewCountAsync(slug : string): Promise<ServiceDataResult<number>>;
 }
 
+
+    /*--------------------------------------------*
+     *          SERVICE IMPLEMENTATION            *
+     *--------------------------------------------*/
+
 /**
  * Implementation of IAnalyticsService that persists the view data through the
  * storage service as JSON

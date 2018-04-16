@@ -19,6 +19,10 @@ export class BaseController {
         res.render(view, data);
     }
 
+    public Redirect(res: Response, url: string) {
+        res.redirect(url);
+    }
+
     public Ok(res: Response) {
         res.status(200).send();
     } 

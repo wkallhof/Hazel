@@ -1,0 +1,27 @@
+<%- include("layout-top", {title: "Edit "+document.title}); %>
+
+<div>
+    <h2>Edit <%= document.title %></h2>
+
+    <form action="/<%= document.slug %>" method="POST">
+        <input type="hidden" name="slug" value="<%= document.slug %>"/>
+        <input type="hidden" name="updateDate" value="<%= document.updateDate %>"/>
+        <input type="hidden" name="createDate" value="<%= document.createDate %>"/>
+
+        <%# Title  %>
+        <label for="title">Title</label>
+        <input type="text" name="title" value="<%= document.title %>" />
+
+        <%# Markdown  %>
+        <label for="rawContent">Content</label>
+        <textarea type="text" name="rawContent"><%= document.rawContent %></textarea>
+
+        <%# Submit  %>
+        <input type="submit" value="Save" />
+    </form>
+
+    <% var cancelLink = document.createDate && document.createDate > 0 ? `/${document.slug}` : "/" %>
+    <a href="<%= cancelLink %>">Cancel</a>
+</div>
+
+<%- include("layout-bottom"); %>
