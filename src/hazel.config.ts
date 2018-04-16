@@ -3,6 +3,7 @@ import { IDocumentParserService } from "./features/document/document-parser.serv
 import { Component } from "@nestjs/common";
 import { IAnalyticsService } from "./features/analytics/analytics.service";
 import { IDocumentService } from "./features/document/document.service";
+import { ISearchService } from "./features/search/search.service";
 
 export class HazelConfig{
 
@@ -20,6 +21,7 @@ export class HazelServices{
     public documentParserService: IDocumentParserService;
     public analyticsService: IAnalyticsService;
     public documentsService: IDocumentService;
+    public searchService: ISearchService;
 
     public constructor(init?:Partial<HazelServices>) {
         Object.assign(this, init);

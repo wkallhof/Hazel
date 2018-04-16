@@ -1,0 +1,17 @@
+<%# Model : SearchViewModel %>
+<%# %>
+
+<%- include("layout-top", {title: title}); %>
+
+<section>
+<h2>Search Results for <%= term %></h2>
+<ul>
+     <% results.forEach((searchResult) => {%>
+        <li><%= searchResult.score %><a href="/<%= searchResult.document.slug %>"><%= searchResult.document.title %></a></li>
+     <%});%>
+</ul>  
+
+</section>
+
+
+<%- include("layout-bottom"); %>

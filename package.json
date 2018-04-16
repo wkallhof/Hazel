@@ -17,6 +17,7 @@
     "@nestjs/websockets": "^4.5.8",
     "@types/fs-extra": "^5.0.1",
     "@types/lodash": "^4.14.104",
+    "@types/natural": "^0.2.33",
     "@types/underscore.string": "0.0.32",
     "ejs": "^2.5.7",
     "fs-extra": "^5.0.0",

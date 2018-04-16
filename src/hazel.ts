@@ -14,6 +14,8 @@ import * as express from 'express';
 import * as path from 'path';
 import { HazelConfig, HazelServices } from './hazel.config';
 import { JsonStorageAnalyticsService } from './features/analytics/analytics.service';
+import { SimpleRegexSearchService } from './features/search/search.service';
+import { SearchController } from './features/search/search.controller';
 
 export class Hazel{
     private _config: HazelConfig;
@@ -35,6 +37,7 @@ export class Hazel{
         await this.loadStorageService();
         await this.loadAnalyticsService();
         await this.loadDocumentsService();
+        this.loadSearchService();
 
         // create application module
         this._app = await NestFactory.create(HazelModule.create(this._config, this._services));
@@ -87,6 +90,11 @@ export class Hazel{
         
         this._services.documentsService = documentService;
     }
+
+    private loadSearchService() {
+        if (this._services.searchService != null) return;
+        this._services.searchService = new SimpleRegexSearchService(this._services.documentsService);
+    }
 }
 
 class HazelModule {
@@ -94,12 +102,13 @@ class HazelModule {
         
         return {
             module: HazelModule,
-            controllers: [HomeController, DocumentController],
+            controllers: [HomeController, DocumentController, SearchController],
             components: [
                 { provide: DI.IDocumentService, useFactory: () => services.documentsService },
                 { provide: DI.IDocumentParserService, useFactory: () => services.documentParserService },
                 { provide: DI.IStorageService, useFactory: () => services.storageService },
                 { provide: DI.IAnalyticsService, useFactory: () => services.analyticsService },
+                { provide: DI.ISearchService, useFactory: () => services.searchService },
                 { provide: DI.HazelConfig, useFactory: () => config }
             ],
           };
