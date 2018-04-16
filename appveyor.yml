@@ -5,8 +5,12 @@ install:
   - ps: Install-Product node $env:nodejs_version
   - npm install
 
-build:
-  - tsc
+branches:
+  only:
+  - v2
+build_script:
+- cmd: tsc
+
 # test_script:
 #   - node --version
 #   - npm --version

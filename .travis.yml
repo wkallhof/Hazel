@@ -2,5 +2,10 @@ language: node_js
 node_js:
   - "8.4.0"
 sudo: false
-script: "npm install && tsc"
+install:
+  - npm install
+script: tsc
+branches:
+  only:
+  - v2
 # after_script: "npm install coveralls@2.10.0 && cat ./coverage/lcov.info | coveralls"
