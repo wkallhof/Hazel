@@ -1,4 +1,4 @@
-import { Get, Controller, Inject, Res, Param, HttpException } from '@nestjs/common';
+import { Get, Controller, Inject, Res, Param, HttpException, Query } from '@nestjs/common';
 import { Response } from "express";
 import Document from '../document/document';
 import DI from '../../di';
@@ -26,8 +26,8 @@ export class SearchController extends BaseController {
         this._searchService = searchService;
     }
     
-	@Get("/search/:term")
-    async index(@Res() res: Response, @Param() params) {
+	@Get("search")
+    async index(@Res() res: Response, @Query() params) {
         
         if (params.term == null)
             this.BadRequest();

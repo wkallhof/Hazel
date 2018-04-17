@@ -1,4 +1,4 @@
-import { Module, DynamicModule, ValidationPipe, INestApplication } from '@nestjs/common';
+import { Module, DynamicModule, ValidationPipe, INestApplication, MiddlewaresConsumer, NestModule } from '@nestjs/common';
 import { HomeController } from './features/home/home.controller';
 import { DocumentController } from "./features/document/document.controller";
 
@@ -16,6 +16,8 @@ import { HazelConfig, HazelServices } from './hazel.config';
 import { JsonStorageAnalyticsService } from './features/analytics/analytics.service';
 import { SimpleRegexSearchService } from './features/search/search.service';
 import { SearchController } from './features/search/search.controller';
+import { BasicAuthService } from './features/auth/auth.service';
+import { AuthMiddleware } from './features/auth/auth.middleware';
 
 export class Hazel{
     private _config: HazelConfig;
@@ -38,6 +40,7 @@ export class Hazel{
         await this.loadAnalyticsService();
         await this.loadDocumentsService();
         this.loadSearchService();
+        this.loadAuthService();
 
         // create application module
         this._app = await NestFactory.create(HazelModule.create(this._config, this._services));
@@ -95,22 +98,33 @@ export class Hazel{
         if (this._services.searchService != null) return;
         this._services.searchService = new SimpleRegexSearchService(this._services.documentsService);
     }
+
+    private loadAuthService() {
+        if (this._services.authService != null) return;
+        this._services.authService = new BasicAuthService(this._config);
+    }
 }
 
-class HazelModule {
+class HazelModule implements NestModule {
+
     static create(config: HazelConfig, services: HazelServices): DynamicModule {
-        
+
         return {
             module: HazelModule,
-            controllers: [HomeController, DocumentController, SearchController],
+            controllers: [SearchController, HomeController, DocumentController],
             components: [
                 { provide: DI.IDocumentService, useFactory: () => services.documentsService },
                 { provide: DI.IDocumentParserService, useFactory: () => services.documentParserService },
                 { provide: DI.IStorageService, useFactory: () => services.storageService },
                 { provide: DI.IAnalyticsService, useFactory: () => services.analyticsService },
                 { provide: DI.ISearchService, useFactory: () => services.searchService },
+                { provide: DI.IAuthService, useFactory: () => services.authService },
                 { provide: DI.HazelConfig, useFactory: () => config }
             ],
           };
     }
+
+    configure(consumer: MiddlewaresConsumer): void {
+        consumer.apply(AuthMiddleware).forRoutes(SearchController, HomeController, DocumentController);
+      }
 }

@@ -6,7 +6,12 @@ async function server() {
     const config = new HazelConfig({
         appTitle: "Example app",
         dataDirectory: __dirname + "/data/",
-        contentDirectory: __dirname + "/content/"
+        contentDirectory: __dirname + "/content/",
+        authEnabled: false,
+        authSettings: {
+            username: "test",
+            password: "test"
+        }
     });
 
     const hazel = new Hazel(config, new HazelServices());

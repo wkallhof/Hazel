@@ -4,6 +4,7 @@ import { Component } from "@nestjs/common";
 import { IAnalyticsService } from "./features/analytics/analytics.service";
 import { IDocumentService } from "./features/document/document.service";
 import { ISearchService } from "./features/search/search.service";
+import { IAuthService } from "./features/auth/auth.service";
 
 export class HazelConfig{
 
@@ -13,6 +14,9 @@ export class HazelConfig{
     public viewsDirectory: string = __dirname + "/views";
     public publicDirectory: string = __dirname + "/public";
     public viewEngine: string = "ejs";
+
+    public authEnabled: boolean = false;
+    public authSettings: any;
 
     public constructor(init?:Partial<HazelConfig>) {
         Object.assign(this, init);
@@ -25,6 +29,7 @@ export class HazelServices{
     public analyticsService: IAnalyticsService;
     public documentsService: IDocumentService;
     public searchService: ISearchService;
+    public authService: IAuthService;
 
     public constructor(init?:Partial<HazelServices>) {
         Object.assign(this, init);
