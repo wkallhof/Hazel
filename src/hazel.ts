@@ -19,6 +19,9 @@ import { SearchController } from './features/search/search.controller';
 import { BasicAuthService } from './features/auth/auth.service';
 import { AuthMiddleware } from './features/auth/auth.middleware';
 
+import * as cookieParser from "cookie-parser";
+import { CsurfMiddleware } from '@nest-middlewares/csurf';
+
 export class Hazel{
     private _config: HazelConfig;
     private _app: INestApplication;
@@ -48,6 +51,7 @@ export class Hazel{
         // setup server and middleware
         this._app.useGlobalPipes(new ValidationPipe());
         this._app.useGlobalFilters(new GlobalExceptionFilter());
+        this._app.use(cookieParser());
         this._app.use(express.static(this._config.publicDirectory));
         this._app.set('views',this._config.viewsDirectory);
         this._app.set('view engine', this._config.viewEngine);
@@ -125,6 +129,7 @@ class HazelModule implements NestModule {
     }
 
     configure(consumer: MiddlewaresConsumer): void {
-        consumer.apply(AuthMiddleware).forRoutes(SearchController, HomeController, DocumentController);
+        CsurfMiddleware.configure({ cookie: true });
+        consumer.apply([CsurfMiddleware,AuthMiddleware]).forRoutes(SearchController, HomeController, DocumentController);
       }
 }

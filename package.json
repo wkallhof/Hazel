@@ -10,6 +10,7 @@
     "start:prod": "node dist/main.js"
   },
   "dependencies": {
+    "@nest-middlewares/csurf": "^1.1.1",
     "@nestjs/common": "^4.5.9",
     "@nestjs/core": "^4.5.10",
     "@nestjs/microservices": "^4.5.8",
@@ -19,13 +20,14 @@
     "@types/fs-extra": "^5.0.1",
     "@types/lodash": "^4.14.104",
     "@types/marked": "^0.3.0",
-    "@types/natural": "^0.2.33",
     "@types/underscore.string": "0.0.32",
     "basic-auth": "^2.0.0",
+    "cookie-parser": "^1.4.3",
     "ejs": "^2.5.7",
     "fs-extra": "^5.0.0",
     "lodash": "^4.17.5",
     "marked": "^0.3.19",
+    "npm": "^5.8.0",
     "redis": "^2.7.1",
     "reflect-metadata": "0.1.10",
     "rxjs": "^5.5.6",

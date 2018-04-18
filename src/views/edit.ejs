@@ -4,6 +4,7 @@
     <h2>Edit <%= document.title %></h2>
 
     <form action="/<%= document.slug %>" method="POST">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
         <input type="hidden" name="slug" value="<%= document.slug %>"/>
         <input type="hidden" name="updateDate" value="<%= document.updateDate %>"/>
         <input type="hidden" name="createDate" value="<%= document.createDate %>"/>
