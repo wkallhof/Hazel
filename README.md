@@ -6,6 +6,9 @@
   [![Windows Build][appveyor-image]][appveyor-url]
   [![Test Coverage][coveralls-image]][coveralls-url]
 
+# Archived
+Hazel is no longer in active development. If you are interested in taking over development, let me know!
+
 ## Installation
 
 ```bash
